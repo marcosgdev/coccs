@@ -1,0 +1,446 @@
+[Sun Jun  7 11:54:37 2026] PHP 8.2.29 Development Server (http://127.0.0.1:8080) started
+[Sun Jun  7 11:54:41 2026] 127.0.0.1:61786 Accepted
+[Sun Jun  7 11:54:41 2026] 127.0.0.1:61786 Closing
+[Sun Jun  7 11:55:05 2026] 127.0.0.1:64443 Accepted
+[Sun Jun  7 11:55:05 2026] 127.0.0.1:64443 Closing
+[Sun Jun  7 11:55:25 2026] 127.0.0.1:56018 Accepted
+[Sun Jun  7 11:55:25 2026] 127.0.0.1:56018 Closing
+[Sun Jun  7 11:55:25 2026] 127.0.0.1:56019 Accepted
+[Sun Jun  7 11:55:25 2026] 127.0.0.1:56019 Closing
+[Sun Jun  7 11:55:26 2026] 127.0.0.1:56021 Accepted
+[Sun Jun  7 11:55:26 2026] 127.0.0.1:56021 Closing
+[Sun Jun  7 11:55:26 2026] 127.0.0.1:56023 Accepted
+[Sun Jun  7 11:55:26 2026] 127.0.0.1:56023 Closing
+[Sun Jun  7 11:55:26 2026] 127.0.0.1:56029 Accepted
+[Sun Jun  7 11:55:26 2026] 127.0.0.1:56029 Closing
+[Sun Jun  7 11:55:27 2026] 127.0.0.1:56033 Accepted
+[Sun Jun  7 11:55:29 2026] 127.0.0.1:56033 Closing
+[Sun Jun  7 11:55:29 2026] 127.0.0.1:56043 Accepted
+[Sun Jun  7 11:55:29 2026] 127.0.0.1:56043 Closing
+[Sun Jun  7 11:55:29 2026] 127.0.0.1:56045 Accepted
+[Sun Jun  7 11:55:30 2026] 127.0.0.1:56045 Closing
+[Sun Jun  7 11:55:30 2026] 127.0.0.1:56051 Accepted
+[Sun Jun  7 11:55:30 2026] 127.0.0.1:56051 Closing
+[Sun Jun  7 11:55:30 2026] 127.0.0.1:56053 Accepted
+[Sun Jun  7 11:55:30 2026] 127.0.0.1:56053 Closing
+[Sun Jun  7 11:55:30 2026] 127.0.0.1:56057 Accepted
+[Sun Jun  7 11:55:30 2026] 127.0.0.1:56057 Closing
+[Sun Jun  7 11:55:30 2026] 127.0.0.1:56059 Accepted
+[Sun Jun  7 11:55:30 2026] 127.0.0.1:56059 Closing
+[Sun Jun  7 11:55:30 2026] 127.0.0.1:56061 Accepted
+[Sun Jun  7 11:55:31 2026] 127.0.0.1:56061 Closing
+[Sun Jun  7 11:55:32 2026] 127.0.0.1:56067 Accepted
+[Sun Jun  7 11:55:32 2026] 127.0.0.1:56067 Closing
+[Sun Jun  7 22:24:15 2026] 127.0.0.1:58882 Accepted
+[Sun Jun  7 22:24:15 2026] 127.0.0.1:58882 Closing
+[Sun Jun  7 22:24:41 2026] 127.0.0.1:64185 Accepted
+[Sun Jun  7 22:24:41 2026] 127.0.0.1:64185 Closing
+[Sun Jun  7 22:24:41 2026] 127.0.0.1:64186 Accepted
+[Sun Jun  7 22:24:41 2026] 127.0.0.1:64186 Closing
+[Sun Jun  7 22:24:41 2026] 127.0.0.1:64191 Accepted
+[Sun Jun  7 22:24:41 2026] 127.0.0.1:64191 Closing
+[Sun Jun  7 22:24:41 2026] 127.0.0.1:64195 Accepted
+[Sun Jun  7 22:24:42 2026] 127.0.0.1:64195 Closing
+[Sun Jun  7 22:24:42 2026] 127.0.0.1:65212 Accepted
+[Sun Jun  7 22:24:42 2026] 127.0.0.1:65212 Closing
+[Sun Jun  7 22:24:43 2026] 127.0.0.1:65214 Accepted
+[Sun Jun  7 22:24:45 2026] 127.0.0.1:65214 Closing
+[Sun Jun  7 22:24:45 2026] 127.0.0.1:65228 Accepted
+[Sun Jun  7 22:24:45 2026] 127.0.0.1:65228 Closing
+[Sun Jun  7 22:24:45 2026] 127.0.0.1:65230 Accepted
+[Sun Jun  7 22:24:46 2026] 127.0.0.1:65230 Closing
+[Sun Jun  7 22:24:47 2026] 127.0.0.1:54705 Accepted
+[Sun Jun  7 22:24:47 2026] 127.0.0.1:54705 Closing
+[Sun Jun  7 22:24:47 2026] 127.0.0.1:54709 Accepted
+[Sun Jun  7 22:24:47 2026] 127.0.0.1:54709 Closing
+[Sun Jun  7 22:24:47 2026] 127.0.0.1:54711 Accepted
+[Sun Jun  7 22:24:48 2026] 127.0.0.1:54711 Closing
+[Sun Jun  7 22:24:49 2026] 127.0.0.1:54454 Accepted
+[Sun Jun  7 22:24:49 2026] 127.0.0.1:54454 Closing
+[Sun Jun  7 22:24:49 2026] 127.0.0.1:54456 Accepted
+[Sun Jun  7 22:24:50 2026] 127.0.0.1:54456 Closing
+[Sun Jun  7 22:24:51 2026] 127.0.0.1:54466 Accepted
+[Sun Jun  7 22:24:51 2026] 127.0.0.1:54466 Closing
+[Sun Jun  7 22:25:29 2026] 127.0.0.1:57973 Accepted
+[Sun Jun  7 22:25:29 2026] 127.0.0.1:57973 Closing
+[Sun Jun  7 22:25:30 2026] 127.0.0.1:57315 Accepted
+[Sun Jun  7 22:25:30 2026] 127.0.0.1:57315 Closing
+[Sun Jun  7 22:25:30 2026] 127.0.0.1:56730 Accepted
+[Sun Jun  7 22:25:30 2026] 127.0.0.1:56730 [200]: GET /assets/css/app.css
+[Sun Jun  7 22:25:30 2026] 127.0.0.1:56730 Closing
+[Sun Jun  7 22:25:30 2026] 127.0.0.1:63039 Accepted
+[Sun Jun  7 22:25:30 2026] 127.0.0.1:52938 Accepted
+[Sun Jun  7 22:25:30 2026] 127.0.0.1:64448 Accepted
+[Sun Jun  7 22:25:30 2026] 127.0.0.1:63039 [200]: GET /assets/img/logo.svg
+[Sun Jun  7 22:25:30 2026] 127.0.0.1:52938 [200]: GET /assets/js/app.js
+[Sun Jun  7 22:25:30 2026] 127.0.0.1:63039 Closing
+[Sun Jun  7 22:25:30 2026] 127.0.0.1:52938 Closing
+[Sun Jun  7 22:25:47 2026] 127.0.0.1:64448 Closing
+[Sun Jun  7 22:25:47 2026] 127.0.0.1:53359 Accepted
+[Sun Jun  7 22:25:47 2026] 127.0.0.1:53359 Closing
+[Sun Jun  7 22:25:48 2026] 127.0.0.1:59782 Accepted
+[Sun Jun  7 22:25:48 2026] 127.0.0.1:59782 [200]: GET /assets/css/app.css
+[Sun Jun  7 22:25:48 2026] 127.0.0.1:59782 Closing
+[Sun Jun  7 22:25:48 2026] 127.0.0.1:54745 Accepted
+[Sun Jun  7 22:25:48 2026] 127.0.0.1:54745 [200]: GET /assets/js/app.js
+[Sun Jun  7 22:25:48 2026] 127.0.0.1:54745 Closing
+[Sun Jun  7 22:25:48 2026] 127.0.0.1:52283 Accepted
+[Sun Jun  7 22:26:07 2026] 127.0.0.1:59868 Accepted
+[Sun Jun  7 22:26:07 2026] 127.0.0.1:59868 Closing
+[Sun Jun  7 22:26:45 2026] 127.0.0.1:52283 Closing
+[Sun Jun  7 22:26:45 2026] 127.0.0.1:64046 Accepted
+[Sun Jun  7 22:26:45 2026] 127.0.0.1:65010 Accepted
+[Sun Jun  7 22:26:45 2026] 127.0.0.1:64046 [200]: GET /assets/css/app.css
+[Sun Jun  7 22:26:45 2026] 127.0.0.1:65010 [200]: GET /assets/js/app.js
+[Sun Jun  7 22:26:45 2026] 127.0.0.1:64046 Closing
+[Sun Jun  7 22:26:45 2026] 127.0.0.1:65010 Closing
+[Sun Jun  7 22:26:45 2026] 127.0.0.1:63850 Accepted
+[Sun Jun  7 22:26:45 2026] 127.0.0.1:63850 Closing
+[Sun Jun  7 22:26:46 2026] 127.0.0.1:62405 Accepted
+[Sun Jun  7 22:26:46 2026] 127.0.0.1:62405 [200]: GET /assets/css/app.css
+[Sun Jun  7 22:26:46 2026] 127.0.0.1:62405 Closing
+[Sun Jun  7 22:26:46 2026] 127.0.0.1:63050 Accepted
+[Sun Jun  7 22:26:46 2026] 127.0.0.1:63050 [200]: GET /assets/js/app.js
+[Sun Jun  7 22:26:46 2026] 127.0.0.1:63050 Closing
+[Sun Jun  7 22:26:46 2026] 127.0.0.1:62096 Accepted
+[Sun Jun  7 22:28:20 2026] 127.0.0.1:57653 Accepted
+[Sun Jun  7 22:28:20 2026] 127.0.0.1:57653 Closing
+[Sun Jun  7 22:28:20 2026] 127.0.0.1:57654 Accepted
+[Sun Jun  7 22:28:20 2026] 127.0.0.1:57654 Closing
+[Sun Jun  7 22:28:20 2026] 127.0.0.1:57658 Accepted
+[Sun Jun  7 22:28:20 2026] 127.0.0.1:57658 Closing
+[Sun Jun  7 22:28:38 2026] 127.0.0.1:62096 Closed without sending a request; it was probably just an unused speculative preconnection
+[Sun Jun  7 22:28:38 2026] 127.0.0.1:62096 Closing
+[Sun Jun  7 22:28:38 2026] 127.0.0.1:54909 Accepted
+[Sun Jun  7 22:28:38 2026] 127.0.0.1:54909 Closing
+[Sun Jun  7 22:28:39 2026] 127.0.0.1:58349 Accepted
+[Sun Jun  7 22:28:39 2026] 127.0.0.1:58349 [200]: GET /assets/css/app.css
+[Sun Jun  7 22:28:39 2026] 127.0.0.1:58349 Closing
+[Sun Jun  7 22:28:39 2026] 127.0.0.1:57723 Accepted
+[Sun Jun  7 22:28:39 2026] 127.0.0.1:56627 Accepted
+[Sun Jun  7 22:28:39 2026] 127.0.0.1:57723 [200]: GET /assets/js/app.js
+[Sun Jun  7 22:28:39 2026] 127.0.0.1:57723 Closing
+[Sun Jun  7 22:29:05 2026] 127.0.0.1:56745 Accepted
+[Sun Jun  7 22:29:05 2026] 127.0.0.1:56745 Closing
+[Sun Jun  7 22:29:05 2026] 127.0.0.1:56746 Accepted
+[Sun Jun  7 22:29:05 2026] 127.0.0.1:56746 Closing
+[Sun Jun  7 22:29:05 2026] 127.0.0.1:56748 Accepted
+[Sun Jun  7 22:29:05 2026] 127.0.0.1:56748 Closing
+[Sun Jun  7 22:29:05 2026] 127.0.0.1:56751 Accepted
+[Sun Jun  7 22:29:06 2026] 127.0.0.1:56751 Closing
+[Sun Jun  7 22:29:06 2026] 127.0.0.1:56759 Accepted
+[Sun Jun  7 22:29:07 2026] 127.0.0.1:56759 Closing
+[Sun Jun  7 22:29:07 2026] 127.0.0.1:56763 Accepted
+[Sun Jun  7 22:29:09 2026] 127.0.0.1:56763 Closing
+[Sun Jun  7 22:29:10 2026] 127.0.0.1:56775 Accepted
+[Sun Jun  7 22:29:10 2026] 127.0.0.1:56775 Closing
+[Sun Jun  7 22:29:10 2026] 127.0.0.1:56777 Accepted
+[Sun Jun  7 22:29:10 2026] 127.0.0.1:56777 Closing
+[Sun Jun  7 22:29:11 2026] 127.0.0.1:56785 Accepted
+[Sun Jun  7 22:29:11 2026] 127.0.0.1:56785 Closing
+[Sun Jun  7 22:29:11 2026] 127.0.0.1:56787 Accepted
+[Sun Jun  7 22:29:11 2026] 127.0.0.1:56787 Closing
+[Sun Jun  7 22:29:11 2026] 127.0.0.1:56789 Accepted
+[Sun Jun  7 22:29:12 2026] 127.0.0.1:56789 Closing
+[Sun Jun  7 22:29:13 2026] 127.0.0.1:56799 Accepted
+[Sun Jun  7 22:29:13 2026] 127.0.0.1:56799 Closing
+[Sun Jun  7 22:29:13 2026] 127.0.0.1:56801 Accepted
+[Sun Jun  7 22:29:14 2026] 127.0.0.1:56801 Closing
+[Sun Jun  7 22:29:15 2026] 127.0.0.1:56811 Accepted
+[Sun Jun  7 22:29:15 2026] 127.0.0.1:56811 Closing
+[Sun Jun  7 22:30:25 2026] 127.0.0.1:57353 Accepted
+[Sun Jun  7 22:30:25 2026] 127.0.0.1:57353 Closing
+[Sun Jun  7 22:30:25 2026] 127.0.0.1:57354 Accepted
+[Sun Jun  7 22:30:25 2026] 127.0.0.1:57354 Closing
+[Sun Jun  7 22:30:25 2026] 127.0.0.1:57356 Accepted
+[Sun Jun  7 22:30:25 2026] 127.0.0.1:57356 Closing
+[Sun Jun  7 22:30:25 2026] 127.0.0.1:57359 Accepted
+[Sun Jun  7 22:30:26 2026] 127.0.0.1:57359 Closing
+[Sun Jun  7 22:30:26 2026] 127.0.0.1:57365 Accepted
+[Sun Jun  7 22:30:26 2026] 127.0.0.1:57365 Closing
+[Sun Jun  7 22:30:26 2026] 127.0.0.1:57369 Accepted
+[Sun Jun  7 22:30:28 2026] 127.0.0.1:57369 Closing
+[Sun Jun  7 22:30:29 2026] 127.0.0.1:57381 Accepted
+[Sun Jun  7 22:30:29 2026] 127.0.0.1:57381 Closing
+[Sun Jun  7 22:30:29 2026] 127.0.0.1:57383 Accepted
+[Sun Jun  7 22:30:30 2026] 127.0.0.1:57383 Closing
+[Sun Jun  7 22:30:30 2026] 127.0.0.1:57389 Accepted
+[Sun Jun  7 22:30:30 2026] 127.0.0.1:57389 Closing
+[Sun Jun  7 22:30:30 2026] 127.0.0.1:57393 Accepted
+[Sun Jun  7 22:30:30 2026] 127.0.0.1:57393 Closing
+[Sun Jun  7 22:30:30 2026] 127.0.0.1:57395 Accepted
+[Sun Jun  7 22:30:31 2026] 127.0.0.1:57395 Closing
+[Sun Jun  7 22:30:32 2026] 127.0.0.1:57403 Accepted
+[Sun Jun  7 22:30:32 2026] 127.0.0.1:57403 Closing
+[Sun Jun  7 22:30:32 2026] 127.0.0.1:57405 Accepted
+[Sun Jun  7 22:30:33 2026] 127.0.0.1:57405 Closing
+[Sun Jun  7 22:30:33 2026] 127.0.0.1:57413 Accepted
+[Sun Jun  7 22:30:33 2026] 127.0.0.1:57413 Closing
+[Sun Jun  7 22:30:46 2026] 127.0.0.1:56627 Closed without sending a request; it was probably just an unused speculative preconnection
+[Sun Jun  7 22:30:46 2026] 127.0.0.1:56627 Closing
+[Sun Jun  7 22:30:47 2026] 127.0.0.1:56473 Accepted
+[Sun Jun  7 22:30:47 2026] 127.0.0.1:56473 Closing
+[Sun Jun  7 22:30:47 2026] 127.0.0.1:64270 Accepted
+[Sun Jun  7 22:30:47 2026] 127.0.0.1:64270 [200]: GET /assets/css/app.css
+[Sun Jun  7 22:30:47 2026] 127.0.0.1:64270 Closing
+[Sun Jun  7 22:30:47 2026] 127.0.0.1:53858 Accepted
+[Sun Jun  7 22:30:47 2026] 127.0.0.1:61642 Accepted
+[Sun Jun  7 22:30:47 2026] 127.0.0.1:53858 [200]: GET /assets/js/app.js
+[Sun Jun  7 22:30:47 2026] 127.0.0.1:53858 Closing
+[Sun Jun  7 22:31:13 2026] 127.0.0.1:61642 Closing
+[Sun Jun  7 22:31:13 2026] 127.0.0.1:57960 Accepted
+[Sun Jun  7 22:31:14 2026] 127.0.0.1:62507 Accepted
+[Sun Jun  7 22:31:14 2026] 127.0.0.1:59082 Accepted
+[Sun Jun  7 22:31:14 2026] 127.0.0.1:62507 [200]: GET /assets/css/app.css
+[Sun Jun  7 22:31:14 2026] 127.0.0.1:59082 [200]: GET /assets/js/app.js
+[Sun Jun  7 22:31:14 2026] 127.0.0.1:62507 Closing
+[Sun Jun  7 22:31:14 2026] 127.0.0.1:59082 Closing
+[Sun Jun  7 22:31:14 2026] 127.0.0.1:64718 Accepted
+[Sun Jun  7 22:31:22 2026] 127.0.0.1:56132 Accepted
+[Sun Jun  7 22:31:22 2026] 127.0.0.1:56924 Accepted
+[Sun Jun  7 22:31:22 2026] 127.0.0.1:56132 Closing
+[Sun Jun  7 22:31:22 2026] 127.0.0.1:56924 Closing
+[Sun Jun  7 22:31:22 2026] 127.0.0.1:58960 Accepted
+[Sun Jun  7 22:31:22 2026] 127.0.0.1:58960 [200]: GET /assets/css/app.css
+[Sun Jun  7 22:31:22 2026] 127.0.0.1:58960 Closing
+[Sun Jun  7 22:31:22 2026] 127.0.0.1:49378 Accepted
+[Sun Jun  7 22:31:22 2026] 127.0.0.1:56354 Accepted
+[Sun Jun  7 22:31:22 2026] 127.0.0.1:49378 [200]: GET /assets/img/logo.svg
+[Sun Jun  7 22:31:22 2026] 127.0.0.1:56354 [200]: GET /assets/js/app.js
+[Sun Jun  7 22:31:22 2026] 127.0.0.1:49378 Closing
+[Sun Jun  7 22:31:22 2026] 127.0.0.1:56354 Closing
+[Sun Jun  7 22:31:22 2026] 127.0.0.1:53124 Accepted
+[Sun Jun  7 22:31:22 2026] 127.0.0.1:53124 Closing
+[Sun Jun  7 22:31:23 2026] 127.0.0.1:52291 Accepted
+[Sun Jun  7 22:31:33 2026] 127.0.0.1:52291 Closing
+[Sun Jun  7 22:31:33 2026] 127.0.0.1:59361 Accepted
+[Sun Jun  7 22:31:33 2026] 127.0.0.1:59361 Closing
+[Sun Jun  7 22:31:33 2026] 127.0.0.1:49942 Accepted
+[Sun Jun  7 22:31:33 2026] 127.0.0.1:49942 [200]: GET /assets/css/app.css
+[Sun Jun  7 22:31:33 2026] 127.0.0.1:49942 Closing
+[Sun Jun  7 22:31:33 2026] 127.0.0.1:50483 Accepted
+[Sun Jun  7 22:31:33 2026] 127.0.0.1:50483 [200]: GET /assets/js/app.js
+[Sun Jun  7 22:31:33 2026] 127.0.0.1:50483 Closing
+[Sun Jun  7 22:31:34 2026] 127.0.0.1:51577 Accepted
+[Sun Jun  7 22:32:30 2026] 127.0.0.1:51577 Closing
+[Sun Jun  7 22:32:30 2026] 127.0.0.1:61704 Accepted
+[Sun Jun  7 22:32:30 2026] 127.0.0.1:61704 [200]: GET /assets/css/app.css
+[Sun Jun  7 22:32:30 2026] 127.0.0.1:61704 Closing
+[Sun Jun  7 22:32:30 2026] 127.0.0.1:59528 Accepted
+[Sun Jun  7 22:32:30 2026] 127.0.0.1:59528 [200]: GET /assets/js/app.js
+[Sun Jun  7 22:32:30 2026] 127.0.0.1:59528 Closing
+[Sun Jun  7 22:32:44 2026] 127.0.0.1:50936 Accepted
+[Sun Jun  7 22:32:44 2026] 127.0.0.1:50936 Closing
+[Sun Jun  7 22:32:44 2026] 127.0.0.1:62845 Accepted
+[Sun Jun  7 22:32:44 2026] 127.0.0.1:62845 [200]: GET /assets/css/app.css
+[Sun Jun  7 22:32:44 2026] 127.0.0.1:62845 Closing
+[Sun Jun  7 22:32:44 2026] 127.0.0.1:64452 Accepted
+[Sun Jun  7 22:32:44 2026] 127.0.0.1:64452 [200]: GET /assets/js/app.js
+[Sun Jun  7 22:32:44 2026] 127.0.0.1:64452 Closing
+[Sun Jun  7 22:32:44 2026] 127.0.0.1:64932 Accepted
+[Sun Jun  7 22:33:15 2026] 127.0.0.1:64932 Closing
+[Sun Jun  7 22:33:15 2026] 127.0.0.1:57048 Accepted
+[Sun Jun  7 22:33:15 2026] 127.0.0.1:57048 [200]: GET /assets/css/app.css
+[Sun Jun  7 22:33:15 2026] 127.0.0.1:57048 Closing
+[Sun Jun  7 22:33:15 2026] 127.0.0.1:62627 Accepted
+[Sun Jun  7 22:33:15 2026] 127.0.0.1:62627 [200]: GET /assets/js/app.js
+[Sun Jun  7 22:33:15 2026] 127.0.0.1:62627 Closing
+[Sun Jun  7 22:34:39 2026] 127.0.0.1:58899 Accepted
+[Sun Jun  7 22:34:39 2026] 127.0.0.1:58899 Closing
+[Sun Jun  7 22:34:39 2026] 127.0.0.1:57869 Accepted
+[Sun Jun  7 22:34:39 2026] 127.0.0.1:57869 [200]: GET /assets/css/app.css
+[Sun Jun  7 22:34:39 2026] 127.0.0.1:57869 Closing
+[Sun Jun  7 22:34:39 2026] 127.0.0.1:62554 Accepted
+[Sun Jun  7 22:34:39 2026] 127.0.0.1:62554 [200]: GET /assets/js/app.js
+[Sun Jun  7 22:34:39 2026] 127.0.0.1:62554 Closing
+[Sun Jun  7 22:34:39 2026] 127.0.0.1:56214 Accepted
+[Sun Jun  7 22:34:52 2026] 127.0.0.1:56214 Closing
+[Sun Jun  7 22:34:52 2026] 127.0.0.1:63221 Accepted
+[Sun Jun  7 22:34:52 2026] 127.0.0.1:63221 [200]: GET /assets/css/app.css
+[Sun Jun  7 22:34:52 2026] 127.0.0.1:63221 Closing
+[Sun Jun  7 22:34:52 2026] 127.0.0.1:52134 Accepted
+[Sun Jun  7 22:34:52 2026] 127.0.0.1:52134 [200]: GET /assets/js/app.js
+[Sun Jun  7 22:34:52 2026] 127.0.0.1:52134 Closing
+[Sun Jun  7 22:34:57 2026] 127.0.0.1:55271 Accepted
+[Sun Jun  7 22:34:57 2026] 127.0.0.1:55271 Closing
+[Sun Jun  7 22:34:57 2026] 127.0.0.1:59544 Accepted
+[Sun Jun  7 22:34:57 2026] 127.0.0.1:59544 [200]: GET /assets/css/app.css
+[Sun Jun  7 22:34:57 2026] 127.0.0.1:59544 Closing
+[Sun Jun  7 22:34:57 2026] 127.0.0.1:61796 Accepted
+[Sun Jun  7 22:34:57 2026] 127.0.0.1:61796 [200]: GET /assets/js/app.js
+[Sun Jun  7 22:34:57 2026] 127.0.0.1:61796 Closing
+[Sun Jun  7 22:34:57 2026] 127.0.0.1:60611 Accepted
+[Sun Jun  7 22:35:01 2026] 127.0.0.1:60611 Closing
+[Sun Jun  7 22:35:01 2026] 127.0.0.1:53054 Accepted
+[Sun Jun  7 22:35:01 2026] 127.0.0.1:53054 [200]: GET /assets/css/app.css
+[Sun Jun  7 22:35:01 2026] 127.0.0.1:53054 Closing
+[Sun Jun  7 22:35:01 2026] 127.0.0.1:51146 Accepted
+[Sun Jun  7 22:35:01 2026] 127.0.0.1:51146 [200]: GET /assets/js/app.js
+[Sun Jun  7 22:35:01 2026] 127.0.0.1:51146 Closing
+[Sun Jun  7 22:35:03 2026] 127.0.0.1:56334 Accepted
+[Sun Jun  7 22:35:03 2026] 127.0.0.1:56334 Closing
+[Sun Jun  7 22:35:04 2026] 127.0.0.1:64761 Accepted
+[Sun Jun  7 22:35:04 2026] 127.0.0.1:64761 [200]: GET /assets/css/app.css
+[Sun Jun  7 22:35:04 2026] 127.0.0.1:64761 Closing
+[Sun Jun  7 22:35:04 2026] 127.0.0.1:61537 Accepted
+[Sun Jun  7 22:35:04 2026] 127.0.0.1:61537 [200]: GET /assets/js/app.js
+[Sun Jun  7 22:35:04 2026] 127.0.0.1:61537 Closing
+[Sun Jun  7 22:35:04 2026] 127.0.0.1:53627 Accepted
+[Sun Jun  7 22:35:09 2026] 127.0.0.1:53627 Closing
+[Sun Jun  7 22:35:09 2026] 127.0.0.1:52196 Accepted
+[Sun Jun  7 22:35:09 2026] 127.0.0.1:52196 [200]: GET /assets/css/app.css
+[Sun Jun  7 22:35:09 2026] 127.0.0.1:52196 Closing
+[Sun Jun  7 22:35:09 2026] 127.0.0.1:61485 Accepted
+[Sun Jun  7 22:35:09 2026] 127.0.0.1:61485 [200]: GET /assets/js/app.js
+[Sun Jun  7 22:35:09 2026] 127.0.0.1:61485 Closing
+[Sun Jun  7 22:35:26 2026] 127.0.0.1:53320 Accepted
+[Sun Jun  7 22:35:26 2026] 127.0.0.1:53320 Closing
+[Sun Jun  7 22:35:26 2026] 127.0.0.1:59884 Accepted
+[Sun Jun  7 22:35:26 2026] 127.0.0.1:59884 [200]: GET /assets/css/app.css
+[Sun Jun  7 22:35:26 2026] 127.0.0.1:59884 Closing
+[Sun Jun  7 22:35:27 2026] 127.0.0.1:58806 Accepted
+[Sun Jun  7 22:35:27 2026] 127.0.0.1:58806 [200]: GET /assets/js/app.js
+[Sun Jun  7 22:35:27 2026] 127.0.0.1:58806 Closing
+[Sun Jun  7 22:35:27 2026] 127.0.0.1:51667 Accepted
+[Sun Jun  7 22:35:40 2026] 127.0.0.1:51667 Closing
+[Sun Jun  7 22:35:40 2026] 127.0.0.1:56776 Accepted
+[Sun Jun  7 22:35:40 2026] 127.0.0.1:56776 [200]: GET /assets/css/app.css
+[Sun Jun  7 22:35:40 2026] 127.0.0.1:56776 Closing
+[Sun Jun  7 22:35:40 2026] 127.0.0.1:58137 Accepted
+[Sun Jun  7 22:35:40 2026] 127.0.0.1:58137 [200]: GET /assets/js/app.js
+[Sun Jun  7 22:35:40 2026] 127.0.0.1:58137 Closing
+[Sun Jun  7 22:35:47 2026] 127.0.0.1:53285 Accepted
+[Sun Jun  7 22:35:47 2026] 127.0.0.1:53285 Closing
+[Sun Jun  7 22:35:47 2026] 127.0.0.1:59669 Accepted
+[Sun Jun  7 22:35:47 2026] 127.0.0.1:59669 [200]: GET /assets/css/app.css
+[Sun Jun  7 22:35:47 2026] 127.0.0.1:59669 Closing
+[Sun Jun  7 22:35:47 2026] 127.0.0.1:51111 Accepted
+[Sun Jun  7 22:35:47 2026] 127.0.0.1:51111 [200]: GET /assets/js/app.js
+[Sun Jun  7 22:35:47 2026] 127.0.0.1:51111 Closing
+[Sun Jun  7 22:35:47 2026] 127.0.0.1:63593 Accepted
+[Sun Jun  7 22:36:01 2026] 127.0.0.1:63593 Closing
+[Sun Jun  7 22:36:01 2026] 127.0.0.1:62110 Accepted
+[Sun Jun  7 22:36:01 2026] 127.0.0.1:62110 [200]: GET /assets/css/app.css
+[Sun Jun  7 22:36:01 2026] 127.0.0.1:62110 Closing
+[Sun Jun  7 22:36:01 2026] 127.0.0.1:54448 Accepted
+[Sun Jun  7 22:36:01 2026] 127.0.0.1:54448 [200]: GET /assets/js/app.js
+[Sun Jun  7 22:36:01 2026] 127.0.0.1:54448 Closing
+[Sun Jun  7 22:36:05 2026] 127.0.0.1:60565 Accepted
+[Sun Jun  7 22:36:05 2026] 127.0.0.1:60565 Closing
+[Sun Jun  7 22:36:05 2026] 127.0.0.1:60065 Accepted
+[Sun Jun  7 22:36:05 2026] 127.0.0.1:60065 [200]: GET /assets/css/app.css
+[Sun Jun  7 22:36:05 2026] 127.0.0.1:60065 Closing
+[Sun Jun  7 22:36:05 2026] 127.0.0.1:56628 Accepted
+[Sun Jun  7 22:36:05 2026] 127.0.0.1:56628 [200]: GET /assets/js/app.js
+[Sun Jun  7 22:36:05 2026] 127.0.0.1:56628 Closing
+[Sun Jun  7 22:36:06 2026] 127.0.0.1:51042 Accepted
+[Sun Jun  7 22:36:14 2026] 127.0.0.1:51042 Closing
+[Sun Jun  7 22:36:14 2026] 127.0.0.1:50550 Accepted
+[Sun Jun  7 22:36:14 2026] 127.0.0.1:50550 [200]: GET /assets/css/app.css
+[Sun Jun  7 22:36:14 2026] 127.0.0.1:50550 Closing
+[Sun Jun  7 22:36:14 2026] 127.0.0.1:50726 Accepted
+[Sun Jun  7 22:36:14 2026] 127.0.0.1:50726 [200]: GET /assets/js/app.js
+[Sun Jun  7 22:36:14 2026] 127.0.0.1:50726 Closing
+[Sun Jun  7 22:36:17 2026] 127.0.0.1:56026 Accepted
+[Sun Jun  7 22:36:17 2026] 127.0.0.1:56026 Closing
+[Sun Jun  7 22:36:18 2026] 127.0.0.1:64790 Accepted
+[Sun Jun  7 22:36:18 2026] 127.0.0.1:64790 [200]: GET /assets/css/app.css
+[Sun Jun  7 22:36:18 2026] 127.0.0.1:64790 Closing
+[Sun Jun  7 22:36:18 2026] 127.0.0.1:52201 Accepted
+[Sun Jun  7 22:36:18 2026] 127.0.0.1:52201 [200]: GET /assets/js/app.js
+[Sun Jun  7 22:36:18 2026] 127.0.0.1:52201 Closing
+[Sun Jun  7 22:36:18 2026] 127.0.0.1:62274 Accepted
+[Sun Jun  7 22:36:21 2026] 127.0.0.1:62274 Closing
+[Sun Jun  7 22:36:21 2026] 127.0.0.1:63533 Accepted
+[Sun Jun  7 22:36:21 2026] 127.0.0.1:63533 [200]: GET /assets/css/app.css
+[Sun Jun  7 22:36:21 2026] 127.0.0.1:63533 Closing
+[Sun Jun  7 22:36:21 2026] 127.0.0.1:53505 Accepted
+[Sun Jun  7 22:36:21 2026] 127.0.0.1:53505 [200]: GET /assets/js/app.js
+[Sun Jun  7 22:36:21 2026] 127.0.0.1:53505 Closing
+[Sun Jun  7 22:36:27 2026] 127.0.0.1:51166 Accepted
+[Sun Jun  7 22:36:27 2026] 127.0.0.1:51166 Closing
+[Sun Jun  7 22:36:27 2026] 127.0.0.1:55276 Accepted
+[Sun Jun  7 22:36:27 2026] 127.0.0.1:55276 [200]: GET /assets/css/app.css
+[Sun Jun  7 22:36:27 2026] 127.0.0.1:55276 Closing
+[Sun Jun  7 22:36:27 2026] 127.0.0.1:63609 Accepted
+[Sun Jun  7 22:36:27 2026] 127.0.0.1:63609 [200]: GET /assets/js/app.js
+[Sun Jun  7 22:36:27 2026] 127.0.0.1:63609 Closing
+[Sun Jun  7 22:36:27 2026] 127.0.0.1:62619 Accepted
+[Sun Jun  7 22:36:29 2026] 127.0.0.1:62619 Closing
+[Sun Jun  7 22:36:30 2026] 127.0.0.1:52020 Accepted
+[Sun Jun  7 22:36:30 2026] 127.0.0.1:52020 [200]: GET /assets/css/app.css
+[Sun Jun  7 22:36:30 2026] 127.0.0.1:52020 Closing
+[Sun Jun  7 22:36:30 2026] 127.0.0.1:51054 Accepted
+[Sun Jun  7 22:36:30 2026] 127.0.0.1:51054 [200]: GET /assets/js/app.js
+[Sun Jun  7 22:36:30 2026] 127.0.0.1:51054 Closing
+[Sun Jun  7 22:36:49 2026] 127.0.0.1:63580 Accepted
+[Sun Jun  7 22:36:49 2026] 127.0.0.1:63580 Closing
+[Sun Jun  7 22:36:49 2026] 127.0.0.1:57622 Accepted
+[Sun Jun  7 22:36:49 2026] 127.0.0.1:57622 [200]: GET /assets/css/app.css
+[Sun Jun  7 22:36:49 2026] 127.0.0.1:57622 Closing
+[Sun Jun  7 22:36:50 2026] 127.0.0.1:64508 Accepted
+[Sun Jun  7 22:36:50 2026] 127.0.0.1:64508 [200]: GET /assets/js/app.js
+[Sun Jun  7 22:36:50 2026] 127.0.0.1:64508 Closing
+[Sun Jun  7 22:36:50 2026] 127.0.0.1:63073 Accepted
+[Sun Jun  7 22:37:16 2026] 127.0.0.1:63073 Closing
+[Sun Jun  7 22:37:16 2026] 127.0.0.1:55488 Accepted
+[Sun Jun  7 22:37:16 2026] 127.0.0.1:55488 [200]: GET /assets/css/app.css
+[Sun Jun  7 22:37:16 2026] 127.0.0.1:55488 Closing
+[Sun Jun  7 22:37:16 2026] 127.0.0.1:62231 Accepted
+[Sun Jun  7 22:37:16 2026] 127.0.0.1:62231 [200]: GET /assets/js/app.js
+[Sun Jun  7 22:37:16 2026] 127.0.0.1:62231 Closing
+[Sun Jun  7 22:37:18 2026] 127.0.0.1:54477 Accepted
+[Sun Jun  7 22:37:18 2026] 127.0.0.1:54477 Closing
+[Sun Jun  7 22:37:18 2026] 127.0.0.1:53167 Accepted
+[Sun Jun  7 22:37:18 2026] 127.0.0.1:53167 [200]: GET /assets/css/app.css
+[Sun Jun  7 22:37:18 2026] 127.0.0.1:53167 Closing
+[Sun Jun  7 22:37:18 2026] 127.0.0.1:59769 Accepted
+[Sun Jun  7 22:37:18 2026] 127.0.0.1:59769 [200]: GET /assets/js/app.js
+[Sun Jun  7 22:37:18 2026] 127.0.0.1:59769 Closing
+[Sun Jun  7 22:37:18 2026] 127.0.0.1:60109 Accepted
+[Sun Jun  7 22:39:27 2026] 127.0.0.1:60109 Closed without sending a request; it was probably just an unused speculative preconnection
+[Sun Jun  7 22:39:27 2026] 127.0.0.1:60109 Closing
+[Sun Jun  7 22:39:28 2026] 127.0.0.1:57481 Accepted
+[Sun Jun  7 22:39:28 2026] 127.0.0.1:57481 Closing
+[Sun Jun  7 22:39:28 2026] 127.0.0.1:63021 Accepted
+[Sun Jun  7 22:39:28 2026] 127.0.0.1:63021 [200]: GET /assets/css/app.css
+[Sun Jun  7 22:39:28 2026] 127.0.0.1:63021 Closing
+[Sun Jun  7 22:39:28 2026] 127.0.0.1:63983 Accepted
+[Sun Jun  7 22:39:28 2026] 127.0.0.1:63983 [200]: GET /assets/js/app.js
+[Sun Jun  7 22:39:28 2026] 127.0.0.1:63983 Closing
+[Sun Jun  7 22:39:28 2026] 127.0.0.1:63507 Accepted
+[Sun Jun  7 22:39:29 2026] 127.0.0.1:63507 Closing
+[Sun Jun  7 22:39:29 2026] 127.0.0.1:56539 Accepted
+[Sun Jun  7 22:39:29 2026] 127.0.0.1:56539 [200]: GET /assets/css/app.css
+[Sun Jun  7 22:39:29 2026] 127.0.0.1:56539 Closing
+[Sun Jun  7 22:39:29 2026] 127.0.0.1:61315 Accepted
+[Sun Jun  7 22:39:29 2026] 127.0.0.1:61315 [200]: GET /assets/js/app.js
+[Sun Jun  7 22:39:29 2026] 127.0.0.1:61315 Closing
+[Sun Jun  7 22:39:49 2026] 127.0.0.1:64591 Accepted
+[Sun Jun  7 22:39:49 2026] 127.0.0.1:64591 Closing
+[Sun Jun  7 22:39:49 2026] 127.0.0.1:53681 Accepted
+[Sun Jun  7 22:39:49 2026] 127.0.0.1:53681 [200]: GET /assets/css/app.css
+[Sun Jun  7 22:39:49 2026] 127.0.0.1:53681 Closing
+[Sun Jun  7 22:39:49 2026] 127.0.0.1:54091 Accepted
+[Sun Jun  7 22:39:49 2026] 127.0.0.1:54091 [200]: GET /assets/js/app.js
+[Sun Jun  7 22:39:49 2026] 127.0.0.1:54091 Closing
+[Sun Jun  7 22:39:49 2026] 127.0.0.1:51665 Accepted
+[Sun Jun  7 22:39:49 2026] 127.0.0.1:51665 Closing
+[Sun Jun  7 22:39:49 2026] 127.0.0.1:53348 Accepted
+[Sun Jun  7 22:39:49 2026] 127.0.0.1:53348 [200]: GET /assets/css/app.css
+[Sun Jun  7 22:39:49 2026] 127.0.0.1:53348 Closing
+[Sun Jun  7 22:39:49 2026] 127.0.0.1:63390 Accepted
+[Sun Jun  7 22:39:49 2026] 127.0.0.1:63390 [200]: GET /assets/js/app.js
+[Sun Jun  7 22:39:49 2026] 127.0.0.1:63390 Closing
+[Sun Jun  7 22:42:59 2026] 127.0.0.1:57960 Invalid request (Foi forçado o cancelamento de uma conexão existente pelo host remoto)
+[Sun Jun  7 22:42:59 2026] 127.0.0.1:57960 Closing
+[Sun Jun  7 22:42:59 2026] 127.0.0.1:64718 Invalid request (Foi forçado o cancelamento de uma conexão existente pelo host remoto)
+[Sun Jun  7 22:42:59 2026] 127.0.0.1:64718 Closing
+[Sun Jun  7 22:44:40 2026] 127.0.0.1:50570 Accepted
+[Sun Jun  7 22:44:41 2026] 127.0.0.1:50570 Closing
+[Sun Jun  7 22:44:41 2026] 127.0.0.1:62583 Accepted
+[Sun Jun  7 22:44:41 2026] 127.0.0.1:61990 Accepted
+[Sun Jun  7 22:44:41 2026] 127.0.0.1:62583 [200]: GET /assets/css/app.css
+[Sun Jun  7 22:44:41 2026] 127.0.0.1:61990 [200]: GET /assets/js/app.js
+[Sun Jun  7 22:44:41 2026] 127.0.0.1:62583 Closing
+[Sun Jun  7 22:44:41 2026] 127.0.0.1:61990 Closing

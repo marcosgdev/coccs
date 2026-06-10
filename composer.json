@@ -1,0 +1,29 @@
+{
+  "name": "tjpa/gestcontratos",
+  "description": "Sistema web para gestao de contratos, ARPs e fiscalizacao baseado na planilha Contratos 2024.xlsm.",
+  "type": "project",
+  "license": "proprietary",
+  "require": {
+    "php": ">=8.1",
+    "ext-pdo": "*",
+    "ext-fileinfo": "*",
+    "phpoffice/phpspreadsheet": "^2.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "GestContratos\\": "app/"
+    },
+    "files": [
+      "app/Core/helpers.php"
+    ]
+  },
+  "scripts": {
+    "serve": "php -S 127.0.0.1:8080 -t public public/router.php",
+    "check": "php scripts/check_syntax.php",
+    "migrate": "php scripts/migrate_import_batches.php",
+    "import:planilha": "php scripts/import_spreadsheet.php"
+  },
+  "config": {
+    "sort-packages": true
+  }
+}

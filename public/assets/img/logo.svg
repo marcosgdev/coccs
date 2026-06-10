@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="48" viewBox="0 0 220 48" role="img" aria-labelledby="title desc">
+  <title id="title">GestContratos</title>
+  <desc id="desc">Logo institucional com documento, escudo e marca de verificacao.</desc>
+  <rect x="1" y="1" width="46" height="46" rx="12" fill="#F7F5FF" stroke="#D8CCFF" stroke-width="2"/>
+  <path d="M15 10h13l7 7v21H15z" fill="#FFFFFF" stroke="#5B3FD6" stroke-width="2"/>
+  <path d="M28 10v8h8" fill="none" stroke="#5B3FD6" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M20 27l4 4 8-10" fill="none" stroke="#1F2937" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="58" y="29" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="800" fill="#1F2937">Gest</text>
+  <text x="105" y="29" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="800" fill="#5B3FD6">Contratos</text>
+</svg>

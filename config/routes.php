@@ -1,0 +1,94 @@
+<?php
+
+use GestContratos\Controllers\AdditivesController;
+use GestContratos\Controllers\ArpsController;
+use GestContratos\Controllers\AuditController;
+use GestContratos\Controllers\AuthController;
+use GestContratos\Controllers\AuxiliaryController;
+use GestContratos\Controllers\ContractsController;
+use GestContratos\Controllers\DashboardController;
+use GestContratos\Controllers\DeadlinesController;
+use GestContratos\Controllers\FinancialExecutionController;
+use GestContratos\Controllers\ImportController;
+use GestContratos\Controllers\ManagementController;
+use GestContratos\Controllers\NotificationsController;
+use GestContratos\Controllers\ReportsController;
+use GestContratos\Controllers\ServersController;
+use GestContratos\Controllers\SettingsController;
+use GestContratos\Controllers\SimpleResourceController;
+use GestContratos\Controllers\UsersController;
+
+$router->get('/login', [AuthController::class, 'showLogin']);
+$router->post('/login', [AuthController::class, 'login']);
+$router->post('/logout', [AuthController::class, 'logout']);
+$router->get('/perfil', [AuthController::class, 'profile']);
+
+$router->get('/', [DashboardController::class, 'index']);
+$router->get('/dashboard', [DashboardController::class, 'index']);
+
+$router->get('/contratos', [ContractsController::class, 'index']);
+$router->get('/contratos/novo', [ContractsController::class, 'create']);
+$router->post('/contratos', [ContractsController::class, 'store']);
+$router->get('/contratos/{id}', [ContractsController::class, 'show']);
+$router->get('/contratos/{id}/editar', [ContractsController::class, 'edit']);
+$router->post('/contratos/{id}', [ContractsController::class, 'update']);
+$router->post('/contratos/{id}/excluir', [ContractsController::class, 'delete']);
+$router->post('/contratos/{id}/duplicar', [ContractsController::class, 'duplicate']);
+$router->post('/contratos/{id}/encerrar', [ContractsController::class, 'close']);
+$router->post('/contratos/{id}/estrategico', [ContractsController::class, 'toggleStrategic']);
+$router->post('/contratos/{id}/notificacao', [ContractsController::class, 'generateNotification']);
+
+$resource = function (string $base, string $controller) use ($router): void {
+    $router->get($base, [$controller, 'index']);
+    $router->get($base . '/novo', [$controller, 'create']);
+    $router->post($base, [$controller, 'store']);
+    $router->get($base . '/{id}/editar', [$controller, 'edit']);
+    $router->post($base . '/{id}', [$controller, 'update']);
+    $router->post($base . '/{id}/excluir', [$controller, 'delete']);
+};
+
+$resource('/arps', ArpsController::class);
+$resource('/execucao-financeira', FinancialExecutionController::class);
+$resource('/aditivos', AdditivesController::class);
+$resource('/servidores', ServersController::class);
+$resource('/usuarios', UsersController::class);
+$resource('/configuracoes', SettingsController::class);
+
+$simple = function (string $base, string $table, string $title, array $extra = []) use ($router): void {
+    $make = fn () => new SimpleResourceController($table, $title, $base, $extra);
+    $router->get($base, fn ($request) => $make()->index($request));
+    $router->get($base . '/novo', fn ($request) => $make()->create());
+    $router->post($base, fn ($request) => $make()->store($request));
+    $router->get($base . '/{id}/editar', fn ($request, $id) => $make()->edit($request, $id));
+    $router->post($base . '/{id}', fn ($request, $id) => $make()->update($request, $id));
+    $router->post($base . '/{id}/excluir', fn ($request, $id) => $make()->delete($request, $id));
+};
+
+$simple('/fornecedores', 'fornecedores', 'Fornecedores');
+$simple('/setores', 'setores', 'Setores');
+$simple('/naturezas-contratacao', 'naturezas_contratacao', 'Naturezas de Contratacao');
+$simple('/formas-contratacao', 'formas_contratacao', 'Formas de Contratacao');
+$simple('/tipos-contrato', 'tipos_contrato', 'Tipos de Contrato');
+$simple('/bases-legais', 'bases_legais', 'Bases Legais');
+$simple('/unidades', 'unidades', 'Unidades');
+$simple('/modelos-notificacao', 'modelos_notificacao', 'Modelos de Notificacao');
+$simple('/perfis', 'perfis', 'Perfis de Acesso', ['slug']);
+
+$router->get('/prazos', [DeadlinesController::class, 'index']);
+$router->get('/gestao-fiscalizacao', [ManagementController::class, 'index']);
+$router->get('/cadastros-auxiliares', [AuxiliaryController::class, 'index']);
+
+$router->get('/notificacoes', [NotificationsController::class, 'index']);
+$router->post('/notificacoes', [NotificationsController::class, 'store']);
+$router->post('/notificacoes/{id}/enviar', [NotificationsController::class, 'markSent']);
+
+$router->get('/relatorios', [ReportsController::class, 'index']);
+
+$router->get('/importacao', [ImportController::class, 'index']);
+$router->post('/importacao/preview', [ImportController::class, 'preview']);
+$router->post('/importacao/executar', [ImportController::class, 'run']);
+$router->post('/importacao/lotes/{id}/desfazer', [ImportController::class, 'undo']);
+$router->post('/importacao/lotes/{id}/excluir', [ImportController::class, 'deleteBatch']);
+$router->get('/logs-importacao', [ImportController::class, 'logs']);
+
+$router->get('/auditoria', [AuditController::class, 'index']);

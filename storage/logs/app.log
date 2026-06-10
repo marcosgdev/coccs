@@ -1,0 +1,70 @@
+[2026-06-07 13:28:14] SQLSTATE[HY000]: General error: 1525 Incorrect DATETIME value: '0000-00-00 00:00:00'
+#0 C:\Users\filho\OneDrive\Documentos\Contratos_tjpa_\app\Core\Model.php(22): PDO->prepare('SELECT * FROM a...')
+#1 C:\Users\filho\OneDrive\Documentos\Contratos_tjpa_\app\Controllers\ResourceController.php(24): GestContratos\Core\Model->all('id DESC', Array, 1000)
+#2 C:\Users\filho\OneDrive\Documentos\Contratos_tjpa_\app\Core\Router.php(58): GestContratos\Controllers\ResourceController->index(Object(GestContratos\Core\Request))
+#3 C:\Users\filho\OneDrive\Documentos\Contratos_tjpa_\app\Core\Router.php(39): GestContratos\Core\Router->call(Array, Object(GestContratos\Core\Request), Array)
+#4 C:\Users\filho\OneDrive\Documentos\Contratos_tjpa_\app\Core\Application.php(29): GestContratos\Core\Router->dispatch(Object(GestContratos\Core\Request))
+#5 C:\Users\filho\OneDrive\Documentos\Contratos_tjpa_\public\index.php(15): GestContratos\Core\Application->run()
+#6 C:\Users\filho\OneDrive\Documentos\Contratos_tjpa_\public\router.php(16): require('C:\\Users\\filho\\...')
+#7 {main}
+
+[2026-06-07 13:34:22] SQLSTATE[HY000]: General error: 1525 Incorrect DATETIME value: '0000-00-00 00:00:00'
+#0 C:\Users\filho\OneDrive\Documentos\Contratos_tjpa_\app\Core\Model.php(22): PDO->prepare('SELECT * FROM a...')
+#1 C:\Users\filho\OneDrive\Documentos\Contratos_tjpa_\app\Controllers\ResourceController.php(24): GestContratos\Core\Model->all('id DESC', Array, 1000)
+#2 C:\Users\filho\OneDrive\Documentos\Contratos_tjpa_\app\Core\Router.php(58): GestContratos\Controllers\ResourceController->index(Object(GestContratos\Core\Request))
+#3 C:\Users\filho\OneDrive\Documentos\Contratos_tjpa_\app\Core\Router.php(39): GestContratos\Core\Router->call(Array, Object(GestContratos\Core\Request), Array)
+#4 C:\Users\filho\OneDrive\Documentos\Contratos_tjpa_\app\Core\Application.php(29): GestContratos\Core\Router->dispatch(Object(GestContratos\Core\Request))
+#5 C:\Users\filho\OneDrive\Documentos\Contratos_tjpa_\public\index.php(15): GestContratos\Core\Application->run()
+#6 C:\Users\filho\OneDrive\Documentos\Contratos_tjpa_\public\router.php(16): require('C:\\Users\\filho\\...')
+#7 {main}
+
+[2026-06-07 13:34:43] SQLSTATE[HY000]: General error: 1525 Incorrect DATETIME value: '0000-00-00 00:00:00'
+#0 C:\Users\filho\OneDrive\Documentos\Contratos_tjpa_\app\Core\Model.php(22): PDO->prepare('SELECT * FROM a...')
+#1 C:\Users\filho\OneDrive\Documentos\Contratos_tjpa_\app\Controllers\ResourceController.php(24): GestContratos\Core\Model->all('id DESC', Array, 1000)
+#2 C:\Users\filho\OneDrive\Documentos\Contratos_tjpa_\app\Core\Router.php(58): GestContratos\Controllers\ResourceController->index(Object(GestContratos\Core\Request))
+#3 C:\Users\filho\OneDrive\Documentos\Contratos_tjpa_\app\Core\Router.php(39): GestContratos\Core\Router->call(Array, Object(GestContratos\Core\Request), Array)
+#4 C:\Users\filho\OneDrive\Documentos\Contratos_tjpa_\app\Core\Application.php(29): GestContratos\Core\Router->dispatch(Object(GestContratos\Core\Request))
+#5 C:\Users\filho\OneDrive\Documentos\Contratos_tjpa_\public\index.php(15): GestContratos\Core\Application->run()
+#6 C:\Users\filho\OneDrive\Documentos\Contratos_tjpa_\public\router.php(16): require('C:\\Users\\filho\\...')
+#7 {main}
+
+[2026-06-07 13:34:58] SQLSTATE[HY000]: General error: 1525 Incorrect DATETIME value: '0000-00-00 00:00:00'
+#0 C:\Users\filho\OneDrive\Documentos\Contratos_tjpa_\app\Core\Model.php(22): PDO->prepare('SELECT * FROM e...')
+#1 C:\Users\filho\OneDrive\Documentos\Contratos_tjpa_\app\Controllers\ResourceController.php(24): GestContratos\Core\Model->all('id DESC', Array, 1000)
+#2 C:\Users\filho\OneDrive\Documentos\Contratos_tjpa_\app\Core\Router.php(58): GestContratos\Controllers\ResourceController->index(Object(GestContratos\Core\Request))
+#3 C:\Users\filho\OneDrive\Documentos\Contratos_tjpa_\app\Core\Router.php(39): GestContratos\Core\Router->call(Array, Object(GestContratos\Core\Request), Array)
+#4 C:\Users\filho\OneDrive\Documentos\Contratos_tjpa_\app\Core\Application.php(29): GestContratos\Core\Router->dispatch(Object(GestContratos\Core\Request))
+#5 C:\Users\filho\OneDrive\Documentos\Contratos_tjpa_\public\index.php(15): GestContratos\Core\Application->run()
+#6 C:\Users\filho\OneDrive\Documentos\Contratos_tjpa_\public\router.php(16): require('C:\\Users\\filho\\...')
+#7 {main}
+
+[2026-06-07 13:35:22] SQLSTATE[HY000]: General error: 1525 Incorrect DATETIME value: '0000-00-00 00:00:00'
+#0 C:\Users\filho\OneDrive\Documentos\Contratos_tjpa_\app\Core\Model.php(22): PDO->prepare('SELECT * FROM a...')
+#1 C:\Users\filho\OneDrive\Documentos\Contratos_tjpa_\app\Controllers\ResourceController.php(24): GestContratos\Core\Model->all('id DESC', Array, 1000)
+#2 C:\Users\filho\OneDrive\Documentos\Contratos_tjpa_\app\Core\Router.php(58): GestContratos\Controllers\ResourceController->index(Object(GestContratos\Core\Request))
+#3 C:\Users\filho\OneDrive\Documentos\Contratos_tjpa_\app\Core\Router.php(39): GestContratos\Core\Router->call(Array, Object(GestContratos\Core\Request), Array)
+#4 C:\Users\filho\OneDrive\Documentos\Contratos_tjpa_\app\Core\Application.php(29): GestContratos\Core\Router->dispatch(Object(GestContratos\Core\Request))
+#5 C:\Users\filho\OneDrive\Documentos\Contratos_tjpa_\public\index.php(15): GestContratos\Core\Application->run()
+#6 C:\Users\filho\OneDrive\Documentos\Contratos_tjpa_\public\router.php(16): require('C:\\Users\\filho\\...')
+#7 {main}
+
+[2026-06-07 13:36:59] SQLSTATE[HY000]: General error: 1525 Incorrect DATETIME value: '0000-00-00 00:00:00'
+#0 C:\Users\filho\OneDrive\Documentos\Contratos_tjpa_\app\Core\Model.php(22): PDO->prepare('SELECT * FROM n...')
+#1 C:\Users\filho\OneDrive\Documentos\Contratos_tjpa_\app\Controllers\NotificationsController.php(18): GestContratos\Core\Model->all('id DESC', Array, 1000)
+#2 C:\Users\filho\OneDrive\Documentos\Contratos_tjpa_\app\Core\Router.php(58): GestContratos\Controllers\NotificationsController->index()
+#3 C:\Users\filho\OneDrive\Documentos\Contratos_tjpa_\app\Core\Router.php(39): GestContratos\Core\Router->call(Array, Object(GestContratos\Core\Request), Array)
+#4 C:\Users\filho\OneDrive\Documentos\Contratos_tjpa_\app\Core\Application.php(29): GestContratos\Core\Router->dispatch(Object(GestContratos\Core\Request))
+#5 C:\Users\filho\OneDrive\Documentos\Contratos_tjpa_\public\index.php(15): GestContratos\Core\Application->run()
+#6 C:\Users\filho\OneDrive\Documentos\Contratos_tjpa_\public\router.php(16): require('C:\\Users\\filho\\...')
+#7 {main}
+
+[2026-06-07 13:42:29] SQLSTATE[HY000]: General error: 1525 Incorrect DATETIME value: '0000-00-00 00:00:00'
+#0 C:\Users\filho\OneDrive\Documentos\Contratos_tjpa_\app\Core\Model.php(22): PDO->prepare('SELECT * FROM p...')
+#1 C:\Users\filho\OneDrive\Documentos\Contratos_tjpa_\app\Controllers\ResourceController.php(24): GestContratos\Core\Model->all('id DESC', Array, 1000)
+#2 C:\Users\filho\OneDrive\Documentos\Contratos_tjpa_\app\Core\Router.php(58): GestContratos\Controllers\ResourceController->index(Object(GestContratos\Core\Request))
+#3 C:\Users\filho\OneDrive\Documentos\Contratos_tjpa_\app\Core\Router.php(39): GestContratos\Core\Router->call(Array, Object(GestContratos\Core\Request), Array)
+#4 C:\Users\filho\OneDrive\Documentos\Contratos_tjpa_\app\Core\Application.php(29): GestContratos\Core\Router->dispatch(Object(GestContratos\Core\Request))
+#5 C:\Users\filho\OneDrive\Documentos\Contratos_tjpa_\public\index.php(15): GestContratos\Core\Application->run()
+#6 C:\Users\filho\OneDrive\Documentos\Contratos_tjpa_\public\router.php(16): require('C:\\Users\\filho\\...')
+#7 {main}
+
