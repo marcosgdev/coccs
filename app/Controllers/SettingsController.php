@@ -13,6 +13,7 @@ final class SettingsController extends ResourceController
         $this->title = 'Configuracoes';
         $this->route = '/configuracoes';
         $this->roles = ['administrador'];
+        $this->indexRequiresPermission = true;
         $this->columns = ['chave' => 'Chave', 'valor' => 'Valor', 'descricao' => 'Descricao'];
         $this->fields = [
             ['name' => 'chave', 'label' => 'Chave', 'required' => true],

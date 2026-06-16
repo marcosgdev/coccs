@@ -1,10 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="220" height="48" viewBox="0 0 220 48" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="96" viewBox="0 0 300 96" role="img" aria-labelledby="title desc">
   <title id="title">GestContratos</title>
-  <desc id="desc">Logo institucional com documento, escudo e marca de verificacao.</desc>
-  <rect x="1" y="1" width="46" height="46" rx="12" fill="#F7F5FF" stroke="#D8CCFF" stroke-width="2"/>
-  <path d="M15 10h13l7 7v21H15z" fill="#FFFFFF" stroke="#5B3FD6" stroke-width="2"/>
-  <path d="M28 10v8h8" fill="none" stroke="#5B3FD6" stroke-width="2" stroke-linejoin="round"/>
-  <path d="M20 27l4 4 8-10" fill="none" stroke="#1F2937" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="58" y="29" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="800" fill="#1F2937">Gest</text>
-  <text x="105" y="29" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="800" fill="#5B3FD6">Contratos</text>
+  <desc id="desc">Marca institucional do GestContratos com documento, escudo e texto em hierarquia visual.</desc>
+  <rect x="2" y="16" width="62" height="62" rx="16" fill="#FFFFFF" stroke="#D4AF37" stroke-width="3"/>
+  <path d="M21 27h18l10 10v29H21z" fill="#FFFFFF" stroke="#002952" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M39 27v11h11" fill="none" stroke="#002952" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M26 52l7 7 14-19" fill="none" stroke="#D4AF37" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M10 68c8 9 34 15 48 0" fill="none" stroke="#002952" stroke-width="2" opacity=".28"/>
+  <text x="78" y="40" font-family="Inter, Arial, sans-serif" font-size="29" font-weight="850" fill="#002952">Gest</text>
+  <text x="78" y="69" font-family="Inter, Arial, sans-serif" font-size="27" font-weight="700" fill="#D4AF37">Contratos</text>
+  <text x="184" y="69" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="700" letter-spacing=".7" fill="#002952">TJPA</text>
+  <text x="79" y="85" font-family="Inter, Arial, sans-serif" font-size="9" font-weight="500" fill="#52677D">Gestao de Contratos, ARPs e Fiscalizacao</text>
 </svg>

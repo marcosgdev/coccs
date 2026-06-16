@@ -37,7 +37,12 @@ if (! function_exists('url')) {
             return $path;
         }
 
-        $base = rtrim(config('app.url', ''), '/');
+        if (! empty($_SERVER['HTTP_HOST'])) {
+            $scheme = (! empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+            $base = $scheme . '://' . $_SERVER['HTTP_HOST'];
+        } else {
+            $base = rtrim(config('app.url', ''), '/');
+        }
         $path = '/' . ltrim($path, '/');
         return $base . ($path === '/' ? '' : $path);
     }

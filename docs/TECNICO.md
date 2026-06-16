@@ -49,14 +49,15 @@ Tabelas centrais:
 - Upload com extensoes permitidas e nome seguro.
 - Controle de perfis via `requirePermission()`.
 
-## Temas e acessibilidade
+## Identidade visual e acessibilidade
 
-O tema e as preferencias ficam em `localStorage`:
+O sistema usa paleta institucional fixa:
 
-- `gc-theme`;
-- `gc-font`;
-- `gc-contrast`;
-- `gc-motion`.
+- azul escuro: `#002952`;
+- branco: `#FFFFFF`;
+- dourado: `#D4AF37`.
+
+Nao ha alternancia de tema por usuario. A acessibilidade e tratada por HTML semantico, foco visivel, contraste adequado e componentes Bootstrap usados com rotulos/ARIA quando necessario.
 
 CSS principal: `public/assets/css/app.css`.
 

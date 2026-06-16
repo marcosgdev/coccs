@@ -1,3 +1,5 @@
+<?php $canWrite = GestContratos\Core\Auth::canWrite(); ?>
+
 <form class="filters" method="get" action="<?= e(url('/contratos')) ?>">
     <div class="row g-3 align-items-end">
         <div class="col-12 col-lg-3">
@@ -28,9 +30,11 @@
     </div>
 </form>
 
-<div class="d-flex justify-content-end mb-3">
-    <a class="btn btn-primary" href="<?= e(url('/contratos/novo')) ?>"><i class="bi bi-plus-lg"></i> Novo contrato</a>
-</div>
+<?php if ($canWrite): ?>
+    <div class="d-flex justify-content-end mb-3">
+        <a class="btn btn-primary" href="<?= e(url('/contratos/novo')) ?>"><i class="bi bi-plus-lg"></i> Novo contrato</a>
+    </div>
+<?php endif; ?>
 
 <section class="gc-card p-3">
     <div class="table-responsive">
@@ -61,7 +65,9 @@
                     <td><?= e(money_br($contract['valor_global_atualizado'])) ?></td>
                     <td class="text-end">
                         <a class="btn btn-sm btn-outline-secondary" href="<?= e(url('/contratos/' . $contract['id'])) ?>" aria-label="Visualizar"><i class="bi bi-eye"></i></a>
-                        <a class="btn btn-sm btn-outline-primary" href="<?= e(url('/contratos/' . $contract['id'] . '/editar')) ?>" aria-label="Editar"><i class="bi bi-pencil"></i></a>
+                        <?php if ($canWrite): ?>
+                            <a class="btn btn-sm btn-outline-primary" href="<?= e(url('/contratos/' . $contract['id'] . '/editar')) ?>" aria-label="Editar"><i class="bi bi-pencil"></i></a>
+                        <?php endif; ?>
                     </td>
                 </tr>
             <?php endforeach; ?>

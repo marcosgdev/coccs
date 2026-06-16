@@ -15,6 +15,8 @@ final class ServersController extends ResourceController
         $this->table = 'servidores';
         $this->title = 'Servidores';
         $this->route = '/servidores';
+        $this->roles = ['administrador'];
+        $this->indexRequiresPermission = true;
         $this->columns = ['nome' => 'Nome', 'matricula' => 'Matricula', 'unidade' => 'Unidade', 'email' => 'E-mail', 'ativo' => 'Ativo'];
         $this->fields = [
             ['name' => 'nome', 'label' => 'Nome', 'required' => true],

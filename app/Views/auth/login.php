@@ -1,7 +1,7 @@
 <section class="auth-card">
     <div class="text-center mb-4">
-        <img src="<?= e(asset('img/logo.svg')) ?>" alt="GestContratos" class="img-fluid mb-3" style="max-width: 220px;">
-        <p class="text-secondary mb-0">Gestao de Contratos, ARPs e Fiscalizacao</p>
+        <img src="<?= e(asset('img/logo.svg')) ?>" alt="GestContratos" class="auth-logo img-fluid mb-3">
+        <p class="text-secondary mb-0">Ambiente institucional para contratos, ARPs e fiscalizacao.</p>
     </div>
 
     <?php require base_path('app/Views/partials/flash.php'); ?>
@@ -21,7 +21,17 @@
         </button>
     </form>
 
-    <div class="small text-secondary mt-4">
-        Primeiro acesso padrao do seed: <strong>admin@gestcontratos.local</strong> / <strong>Admin@123</strong>.
+    <div class="demo-access small text-secondary mt-4">
+        <div class="fw-bold text-uppercase text-primary mb-2">Acessos de demonstracao</div>
+        <div class="mb-2">
+            <strong>Administrador</strong><br>
+            E-mail: <strong>admin@gestcontratos.local</strong><br>
+            Senha: <strong>Admin@123</strong>
+        </div>
+        <div>
+            <strong>Usuario comum</strong><br>
+            E-mail: <strong>usuario@gestcontratos.local</strong><br>
+            Senha: <strong>Usuario@123</strong>
+        </div>
     </div>
 </section>

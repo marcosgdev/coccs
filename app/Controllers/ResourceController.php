@@ -17,10 +17,11 @@ abstract class ResourceController extends Controller
     protected array $columns = [];
     protected array $fields = [];
     protected array $roles = ['gestor-contratos'];
+    protected bool $indexRequiresPermission = false;
 
     public function index(Request $request): void
     {
-        $this->requireAuth();
+        $this->indexRequiresPermission ? $this->requirePermission($this->roles) : $this->requireAuth();
         $items = $this->model->all($this->orderBy(), [], 1000);
         $this->view('shared/resource_index', [
             'title' => $this->title,

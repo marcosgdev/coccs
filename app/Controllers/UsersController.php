@@ -14,6 +14,7 @@ final class UsersController extends ResourceController
         $this->title = 'Usuarios';
         $this->route = '/usuarios';
         $this->roles = ['administrador'];
+        $this->indexRequiresPermission = true;
         $this->columns = ['nome' => 'Nome', 'email' => 'E-mail', 'perfil_id' => 'Perfil ID', 'ativo' => 'Ativo'];
         $this->fields = [
             ['name' => 'nome', 'label' => 'Nome', 'required' => true],

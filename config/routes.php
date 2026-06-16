@@ -10,6 +10,7 @@ use GestContratos\Controllers\DashboardController;
 use GestContratos\Controllers\DeadlinesController;
 use GestContratos\Controllers\FinancialExecutionController;
 use GestContratos\Controllers\ImportController;
+use GestContratos\Controllers\ManualsController;
 use GestContratos\Controllers\ManagementController;
 use GestContratos\Controllers\NotificationsController;
 use GestContratos\Controllers\ReportsController;
@@ -54,8 +55,8 @@ $resource('/servidores', ServersController::class);
 $resource('/usuarios', UsersController::class);
 $resource('/configuracoes', SettingsController::class);
 
-$simple = function (string $base, string $table, string $title, array $extra = []) use ($router): void {
-    $make = fn () => new SimpleResourceController($table, $title, $base, $extra);
+$simple = function (string $base, string $table, string $title, array $extra = [], array $roles = ['gestor-contratos'], bool $indexRequiresPermission = false) use ($router): void {
+    $make = fn () => new SimpleResourceController($table, $title, $base, $extra, $roles, $indexRequiresPermission);
     $router->get($base, fn ($request) => $make()->index($request));
     $router->get($base . '/novo', fn ($request) => $make()->create());
     $router->post($base, fn ($request) => $make()->store($request));
@@ -64,15 +65,16 @@ $simple = function (string $base, string $table, string $title, array $extra = [
     $router->post($base . '/{id}/excluir', fn ($request, $id) => $make()->delete($request, $id));
 };
 
-$simple('/fornecedores', 'fornecedores', 'Fornecedores');
-$simple('/setores', 'setores', 'Setores');
-$simple('/naturezas-contratacao', 'naturezas_contratacao', 'Naturezas de Contratacao');
-$simple('/formas-contratacao', 'formas_contratacao', 'Formas de Contratacao');
-$simple('/tipos-contrato', 'tipos_contrato', 'Tipos de Contrato');
-$simple('/bases-legais', 'bases_legais', 'Bases Legais');
-$simple('/unidades', 'unidades', 'Unidades');
-$simple('/modelos-notificacao', 'modelos_notificacao', 'Modelos de Notificacao');
-$simple('/perfis', 'perfis', 'Perfis de Acesso', ['slug']);
+$adminOnly = ['administrador'];
+$simple('/fornecedores', 'fornecedores', 'Fornecedores', [], $adminOnly, true);
+$simple('/setores', 'setores', 'Setores', [], $adminOnly, true);
+$simple('/naturezas-contratacao', 'naturezas_contratacao', 'Naturezas de Contratacao', [], $adminOnly, true);
+$simple('/formas-contratacao', 'formas_contratacao', 'Formas de Contratacao', [], $adminOnly, true);
+$simple('/tipos-contrato', 'tipos_contrato', 'Tipos de Contrato', [], $adminOnly, true);
+$simple('/bases-legais', 'bases_legais', 'Bases Legais', [], $adminOnly, true);
+$simple('/unidades', 'unidades', 'Unidades', [], $adminOnly, true);
+$simple('/modelos-notificacao', 'modelos_notificacao', 'Modelos de Notificacao', [], $adminOnly, true);
+$simple('/perfis', 'perfis', 'Perfis de Acesso', ['slug'], $adminOnly, true);
 
 $router->get('/prazos', [DeadlinesController::class, 'index']);
 $router->get('/gestao-fiscalizacao', [ManagementController::class, 'index']);
@@ -83,6 +85,10 @@ $router->post('/notificacoes', [NotificationsController::class, 'store']);
 $router->post('/notificacoes/{id}/enviar', [NotificationsController::class, 'markSent']);
 
 $router->get('/relatorios', [ReportsController::class, 'index']);
+
+$router->get('/manuais/uso', [ManualsController::class, 'usage']);
+$router->get('/manuais/manutencao', [ManualsController::class, 'maintenance']);
+$router->get('/manuais/implantacao', [ManualsController::class, 'deployment']);
 
 $router->get('/importacao', [ImportController::class, 'index']);
 $router->post('/importacao/preview', [ImportController::class, 'preview']);

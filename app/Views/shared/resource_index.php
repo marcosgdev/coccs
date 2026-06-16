@@ -1,8 +1,12 @@
-<div class="d-flex justify-content-end mb-3">
-    <a class="btn btn-primary" href="<?= e(url($route . '/novo')) ?>">
-        <i class="bi bi-plus-lg"></i> Novo
-    </a>
-</div>
+<?php $canWrite = GestContratos\Core\Auth::canWrite(); ?>
+
+<?php if ($canWrite): ?>
+    <div class="d-flex justify-content-end mb-3">
+        <a class="btn btn-primary" href="<?= e(url($route . '/novo')) ?>">
+            <i class="bi bi-plus-lg"></i> Novo
+        </a>
+    </div>
+<?php endif; ?>
 
 <section class="gc-card p-3">
     <div class="table-responsive">
@@ -12,7 +16,9 @@
                 <?php foreach ($columns as $label): ?>
                     <th scope="col"><?= e($label) ?></th>
                 <?php endforeach; ?>
-                <th scope="col" class="text-end">Acoes</th>
+                <?php if ($canWrite): ?>
+                    <th scope="col" class="text-end">Acoes</th>
+                <?php endif; ?>
             </tr>
             </thead>
             <tbody>
@@ -32,17 +38,19 @@
                             <?php endif; ?>
                         </td>
                     <?php endforeach; ?>
-                    <td class="text-end">
-                        <a class="btn btn-sm btn-outline-primary" href="<?= e(url($route . '/' . $item['id'] . '/editar')) ?>" aria-label="Editar">
-                            <i class="bi bi-pencil"></i>
-                        </a>
-                        <form method="post" action="<?= e(url($route . '/' . $item['id'] . '/excluir')) ?>" class="d-inline" onsubmit="return confirm('Excluir logicamente este registro?')">
-                            <?= csrf_field() ?>
-                            <button class="btn btn-sm btn-outline-danger" type="submit" aria-label="Excluir">
-                                <i class="bi bi-trash"></i>
-                            </button>
-                        </form>
-                    </td>
+                    <?php if ($canWrite): ?>
+                        <td class="text-end">
+                            <a class="btn btn-sm btn-outline-primary" href="<?= e(url($route . '/' . $item['id'] . '/editar')) ?>" aria-label="Editar">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                            <form method="post" action="<?= e(url($route . '/' . $item['id'] . '/excluir')) ?>" class="d-inline" onsubmit="return confirm('Excluir logicamente este registro?')">
+                                <?= csrf_field() ?>
+                                <button class="btn btn-sm btn-outline-danger" type="submit" aria-label="Excluir">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </form>
+                        </td>
+                    <?php endif; ?>
                 </tr>
             <?php endforeach; ?>
             </tbody>

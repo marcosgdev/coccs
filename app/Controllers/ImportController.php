@@ -16,7 +16,7 @@ final class ImportController extends Controller
 {
     public function index(): void
     {
-        $this->requirePermission(['gestor-contratos']);
+        $this->requirePermission(['administrador']);
         $this->view('import/index', [
             'title' => 'Importacao da Planilha',
             'preview' => $_SESSION['import_preview'] ?? null,
@@ -30,7 +30,7 @@ final class ImportController extends Controller
 
     public function preview(Request $request): void
     {
-        $this->requirePermission(['gestor-contratos']);
+        $this->requirePermission(['administrador']);
         $this->validateCsrf($request);
         try {
             $relative = (new UploadService())->store($request->files['planilha'] ?? [], 'imports', ['xlsm', 'xlsx']);
@@ -50,7 +50,7 @@ final class ImportController extends Controller
 
     public function run(Request $request): void
     {
-        $this->requirePermission(['gestor-contratos']);
+        $this->requirePermission(['administrador']);
         $this->validateCsrf($request);
         @set_time_limit(0);
         ini_set('memory_limit', '1024M');
@@ -111,7 +111,7 @@ final class ImportController extends Controller
 
     public function logs(Request $request): void
     {
-        $this->requirePermission(['gestor-contratos', 'auditoria-controle']);
+        $this->requirePermission(['administrador']);
         $this->view('import/logs', [
             'title' => 'Logs de Importacao',
             'logs' => $this->filteredLogs($request),
@@ -122,7 +122,7 @@ final class ImportController extends Controller
 
     public function undo(Request $request, string $id): void
     {
-        $this->requirePermission(['gestor-contratos']);
+        $this->requirePermission(['administrador']);
         $this->validateCsrf($request);
         (new ImportBatchService())->undo((int) $id, false);
         flash('success', 'Importacao desativada. Os registros do lote foram marcados como excluidos logicamente.');

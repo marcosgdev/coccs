@@ -1,6 +1,6 @@
 <?php $user = GestContratos\Core\Auth::user(); ?>
 <!doctype html>
-<html lang="pt-BR" data-theme="default">
+<html lang="pt-BR">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">

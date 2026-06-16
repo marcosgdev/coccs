@@ -50,18 +50,26 @@ mysql -u root -p gestcontratos < database/seeds/demo.sql
 
 ## 5. Rodar localmente
 
+No Windows, use:
+
+```bat
+iniciar-local.bat
+```
+
+Ou, pelo Composer:
+
 ```bash
 composer serve
 ```
 
 Acesse `http://localhost:8080`.
 
-## 6. Primeiro usuario
+## 6. Usuarios iniciais
 
-- E-mail: `admin@gestcontratos.local`
-- Senha: `Admin@123`
+- Administrador: `admin@gestcontratos.local` / `Admin@123`
+- Usuario comum: `usuario@gestcontratos.local` / `Usuario@123`
 
-Troque a senha depois do primeiro acesso.
+Troque as senhas antes de uso real.
 
 ## 7. Validar instalacao
 

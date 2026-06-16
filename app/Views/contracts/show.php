@@ -1,18 +1,22 @@
-<div class="d-flex flex-wrap gap-2 justify-content-end mb-3">
-    <a class="btn btn-outline-primary" href="<?= e(url('/contratos/' . $contract['id'] . '/editar')) ?>"><i class="bi bi-pencil"></i> Editar</a>
-    <form method="post" action="<?= e(url('/contratos/' . $contract['id'] . '/duplicar')) ?>">
-        <?= csrf_field() ?>
-        <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-files"></i> Duplicar</button>
-    </form>
-    <form method="post" action="<?= e(url('/contratos/' . $contract['id'] . '/estrategico')) ?>">
-        <?= csrf_field() ?>
-        <button class="btn btn-outline-warning" type="submit"><i class="bi bi-star"></i> Estrategico</button>
-    </form>
-    <form method="post" action="<?= e(url('/contratos/' . $contract['id'] . '/notificacao')) ?>">
-        <?= csrf_field() ?>
-        <button class="btn btn-primary" type="submit"><i class="bi bi-bell"></i> Gerar notificacao</button>
-    </form>
-</div>
+<?php $canWrite = GestContratos\Core\Auth::canWrite(); ?>
+
+<?php if ($canWrite): ?>
+    <div class="d-flex flex-wrap gap-2 justify-content-end mb-3">
+        <a class="btn btn-outline-primary" href="<?= e(url('/contratos/' . $contract['id'] . '/editar')) ?>"><i class="bi bi-pencil"></i> Editar</a>
+        <form method="post" action="<?= e(url('/contratos/' . $contract['id'] . '/duplicar')) ?>">
+            <?= csrf_field() ?>
+            <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-files"></i> Duplicar</button>
+        </form>
+        <form method="post" action="<?= e(url('/contratos/' . $contract['id'] . '/estrategico')) ?>">
+            <?= csrf_field() ?>
+            <button class="btn btn-outline-warning" type="submit"><i class="bi bi-star"></i> Estrategico</button>
+        </form>
+        <form method="post" action="<?= e(url('/contratos/' . $contract['id'] . '/notificacao')) ?>">
+            <?= csrf_field() ?>
+            <button class="btn btn-primary" type="submit"><i class="bi bi-bell"></i> Gerar notificacao</button>
+        </form>
+    </div>
+<?php endif; ?>
 
 <section class="gc-card p-4 mb-3">
     <div class="d-flex flex-wrap justify-content-between gap-3">

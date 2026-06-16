@@ -6,7 +6,7 @@ use GestContratos\Models\GenericModel;
 
 final class SimpleResourceController extends ResourceController
 {
-    public function __construct(string $table, string $title, string $route, array $extraFields = [])
+    public function __construct(string $table, string $title, string $route, array $extraFields = [], array $roles = ['gestor-contratos'], bool $indexRequiresPermission = false)
     {
         $baseFields = [
             'nome', 'descricao', 'codigo', 'documento', 'email', 'telefone', 'ativo',
@@ -16,6 +16,8 @@ final class SimpleResourceController extends ResourceController
         $this->table = $table;
         $this->title = $title;
         $this->route = $route;
+        $this->roles = $roles;
+        $this->indexRequiresPermission = $indexRequiresPermission;
         $this->columns = ['nome' => 'Nome', 'codigo' => 'Codigo', 'descricao' => 'Descricao', 'ativo' => 'Ativo'];
         $this->fields = [
             ['name' => 'nome', 'label' => 'Nome', 'required' => true],

@@ -379,10 +379,12 @@ INSERT IGNORE INTO perfis (id, nome, slug, descricao) VALUES
 (3, 'Setor Demandante', 'setor-demandante', 'Consulta seus contratos e atualiza informacoes permitidas.'),
 (4, 'Gestor/Fiscal', 'gestor-fiscal', 'Consulta contratos em que atua e registra acompanhamento.'),
 (5, 'Consulta Gerencial', 'consulta-gerencial', 'Consulta paineis e relatorios.'),
-(6, 'Auditoria/Controle', 'auditoria-controle', 'Consulta geral, inclusive logs, sem alterar dados.');
+(6, 'Auditoria/Controle', 'auditoria-controle', 'Consulta geral, inclusive logs, sem alterar dados.'),
+(7, 'Usuario comum', 'usuario-comum', 'Acesso operacional sem area administrativa.');
 
 INSERT IGNORE INTO usuarios (id, nome, email, password_hash, perfil_id, ativo) VALUES
-(1, 'Administrador', 'admin@gestcontratos.local', '$2y$10$iQPPtvKfjL8id2ULtY4c6upT6a3ZtEZM6frVSJp7VO6HLZH1b9wMW', 1, 1);
+(1, 'Administrador', 'admin@gestcontratos.local', '$2y$10$iQPPtvKfjL8id2ULtY4c6upT6a3ZtEZM6frVSJp7VO6HLZH1b9wMW', 1, 1),
+(2, 'Usuario comum', 'usuario@gestcontratos.local', '$2y$10$gzgX/ybr2gjw8TeO1wGgoOWI8MDit3FxZ100yEOESNrC.v8vC8bBG', 7, 1);
 
 INSERT IGNORE INTO parametros_sistema (chave, valor, descricao) VALUES
 ('limite_prazo_legal_dias', '1800', 'Limite em dias para classificar contrato como prazo legal.'),

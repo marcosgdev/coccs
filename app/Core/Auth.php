@@ -57,6 +57,11 @@ final class Auth
         return $role === 'administrador' || in_array($role, $roles, true);
     }
 
+    public static function isAdmin(): bool
+    {
+        return ($_SESSION['user']['role'] ?? null) === 'administrador';
+    }
+
     public static function canWrite(): bool
     {
         return self::hasAnyRole(['administrador', 'gestor-contratos', 'setor-demandante', 'gestor-fiscal']);

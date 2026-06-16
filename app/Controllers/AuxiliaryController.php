@@ -8,7 +8,7 @@ final class AuxiliaryController extends Controller
 {
     public function index(): void
     {
-        $this->requireAuth();
+        $this->requirePermission(['administrador']);
         $this->view('auxiliary/index', [
             'title' => 'Cadastros Auxiliares',
         ]);
