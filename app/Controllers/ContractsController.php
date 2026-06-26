@@ -5,10 +5,13 @@ namespace GestContratos\Controllers;
 use GestContratos\Core\Auth;
 use GestContratos\Core\Controller;
 use GestContratos\Core\Request;
+use GestContratos\Models\Additive;
 use GestContratos\Models\Contract;
+use GestContratos\Models\ContractTracking;
 use GestContratos\Models\Notification;
 use GestContratos\Services\AuditService;
 use GestContratos\Services\ContractRulesService;
+use GestContratos\Services\TjpaApiService;
 
 final class ContractsController extends Controller
 {
@@ -28,15 +31,16 @@ final class ContractsController extends Controller
         $this->requireAuth();
         $filters = $request->query;
         $this->view('contracts/index', [
-            'title' => 'Contratos Vigentes',
-            'contracts' => $this->contracts->search($filters),
+            'title'   => 'Contratos Vigentes',
+            'contracts' => $this->contracts->search(array_merge($filters, ['tipo' => 'CONTRATO'])),
             'filters' => $filters,
+            'scripts' => '<script src="' . e(asset('js/tjpa-contratos.js')) . '"></script>',
         ]);
     }
 
     public function create(): void
     {
-        $this->requirePermission(['gestor-contratos']);
+        $this->requireCan(Auth::canWrite());
         $this->view('contracts/form', [
             'title' => 'Novo contrato',
             'contract' => [],
@@ -47,7 +51,7 @@ final class ContractsController extends Controller
 
     public function store(Request $request): void
     {
-        $this->requirePermission(['gestor-contratos']);
+        $this->requireCan(Auth::canWrite());
         $this->validateCsrf($request);
         $data = $this->rules->normalize($this->contractData($request));
         $data['created_by'] = Auth::id();
@@ -66,12 +70,96 @@ final class ContractsController extends Controller
             $this->view('errors/404', ['title' => 'Contrato nao encontrado']);
             return;
         }
-        $this->view('contracts/show', ['title' => $contract['chave'], 'contract' => $contract]);
+        $pdo      = \GestContratos\Core\Database::pdo();
+        $cid      = (int) $id;
+
+        $aditivos = (new Additive())->forContract($cid);
+
+        $q = fn(string $sql, array $p = []) => (function() use ($pdo, $sql, $p) {
+            $s = $pdo->prepare($sql); $s->execute($p); return $s->fetchAll();
+        })();
+
+        // Calcula as 7 métricas financeiras conforme TJPA
+        $finStmt = $pdo->prepare("
+            SELECT
+                COALESCE(SUM(CASE
+                    WHEN LOWER(tipo_aditivo) LIKE '%reajust%'
+                      OR LOWER(tipo_aditivo) LIKE '%reequil%'
+                      OR LOWER(tipo_aditivo) LIKE '%apostil%'
+                    THEN valor_acrescido - valor_suprimido ELSE 0 END), 0) AS valor_reajustes,
+                COALESCE(SUM(CASE
+                    WHEN LOWER(tipo_aditivo) NOT LIKE '%reajust%'
+                     AND LOWER(tipo_aditivo) NOT LIKE '%reequil%'
+                     AND LOWER(tipo_aditivo) NOT LIKE '%apostil%'
+                     AND LOWER(tipo_aditivo) NOT LIKE '%prorrog%'
+                    THEN valor_acrescido - valor_suprimido ELSE 0 END), 0) AS valor_aditivos_liq,
+                COALESCE(SUM(valor_prorrogacao), 0) AS valor_prorrogacao_total,
+                MAX(valor_prorrogacao > 0)           AS sincronizado
+            FROM aditivos
+            WHERE contrato_id = ? AND deleted_at IS NULL
+        ");
+        $finStmt->execute([$cid]);
+        $fin = $finStmt->fetch() ?: [];
+
+        $vOriginal      = (float) ($contract['valor_global_inicial']    ?? 0);
+        $vApiTotal      = (float) ($contract['valor_global_atualizado'] ?? 0);
+        $vProrrog       = (float) ($fin['valor_prorrogacao_total']      ?? 0);
+        $vReajustes     = (float) ($fin['valor_reajustes']              ?? 0);
+        $vAditivosLiq   = (float) ($fin['valor_aditivos_liq']           ?? 0);
+        $sincronizado   = (bool)  ($fin['sincronizado']                 ?? false);
+
+        // Valor Total = API valorTotal (valor_global_atualizado)
+        // Valor Atual = Valor Total − Prorrogação (apenas para contratos sincronizados)
+        $vTotal     = $vApiTotal;
+        $vAtual     = $sincronizado ? ($vApiTotal - $vProrrog) : $vApiTotal;
+        $vCorrigido = $vOriginal + $vReajustes;
+
+        $documentos        = $q('SELECT * FROM contrato_documentos WHERE contrato_id=? ORDER BY data_documento DESC, numero_doc DESC', [$cid]);
+        $itens             = $q('SELECT * FROM contrato_itens WHERE contrato_id=? ORDER BY item ASC', [$cid]);
+        $empenhos          = $q('SELECT * FROM contrato_empenhos WHERE contrato_id=? ORDER BY data_empenho ASC, empenho ASC', [$cid]);
+        $eventos           = $q('SELECT * FROM contrato_eventos WHERE contrato_id=? ORDER BY ordem ASC', [$cid]);
+        $liquidacoes       = $q('SELECT data_liquidacao, SUM(valor_liquidacao) AS valor FROM contrato_liquidacoes WHERE contrato_id=? GROUP BY data_liquidacao ORDER BY data_liquidacao', [$cid]);
+        // Liquidado por empenho — fonte confiável para cálculo por vigência
+        $liqPorEmpenhoRows = $q('SELECT empenho, SUM(valor_liquidacao) AS total FROM contrato_liquidacoes WHERE contrato_id=? GROUP BY empenho', [$cid]);
+        $liqPorEmpenho     = array_column($liqPorEmpenhoRows, 'total', 'empenho');
+        $licitacaoContratos = [];
+        if (!empty($contract['licitacao_numero'])) {
+            $licitacaoContratos = $q(
+                'SELECT id, chave, fornecedor_nome, situacao, valor_global_atualizado FROM contratos
+                 WHERE licitacao_numero=? AND id!=? AND deleted_at IS NULL ORDER BY chave ASC',
+                [$contract['licitacao_numero'], $cid]
+            );
+        }
+
+        $acompanhamentos = (new ContractTracking())->forContract($cid);
+
+        $this->view('contracts/show', [
+            'title'              => $contract['chave'],
+            'acompanhamentos'    => $acompanhamentos,
+            'contract'           => $contract,
+            'aditivos'           => $aditivos,
+            'documentos'         => $documentos,
+            'itens'              => $itens,
+            'empenhos'           => $empenhos,
+            'eventos'            => $eventos,
+            'liquidacoes'        => $liquidacoes,
+            'liqPorEmpenho'      => $liqPorEmpenho,
+            'licitacaoContratos' => $licitacaoContratos,
+            // Métricas financeiras derivadas
+            'vOriginal'          => $vOriginal,
+            'vReajustes'         => $vReajustes,
+            'vCorrigido'         => $vCorrigido,
+            'vAditivosLiq'       => $vAditivosLiq,
+            'vProrrog'           => $vProrrog,
+            'vAtual'             => $vAtual,
+            'vTotal'             => $vTotal,
+            'sincronizado'       => $sincronizado,
+        ]);
     }
 
     public function edit(Request $request, string $id): void
     {
-        $this->requirePermission(['gestor-contratos']);
+        $this->requireCan(Auth::canWrite());
         $contract = $this->contracts->find((int) $id);
         if (! $contract) {
             flash('danger', 'Contrato nao encontrado.');
@@ -87,7 +175,7 @@ final class ContractsController extends Controller
 
     public function update(Request $request, string $id): void
     {
-        $this->requirePermission(['gestor-contratos']);
+        $this->requireCan(Auth::canWrite());
         $this->validateCsrf($request);
         $before = $this->contracts->find((int) $id);
         if (! $before) {
@@ -104,7 +192,7 @@ final class ContractsController extends Controller
 
     public function delete(Request $request, string $id): void
     {
-        $this->requirePermission(['gestor-contratos']);
+        $this->requireCan(Auth::canDelete());
         $this->validateCsrf($request);
         $before = $this->contracts->find((int) $id);
         $this->contracts->softDelete((int) $id);
@@ -115,7 +203,7 @@ final class ContractsController extends Controller
 
     public function duplicate(Request $request, string $id): void
     {
-        $this->requirePermission(['gestor-contratos']);
+        $this->requireCan(Auth::canWrite());
         $contract = $this->contracts->find((int) $id);
         if (! $contract) {
             redirect('/contratos');
@@ -132,7 +220,7 @@ final class ContractsController extends Controller
 
     public function close(Request $request, string $id): void
     {
-        $this->requirePermission(['gestor-contratos']);
+        $this->requireCan(Auth::canDelete());
         $this->validateCsrf($request);
         $this->contracts->update((int) $id, ['situacao' => 'Expirado', 'encerrado_em' => date('Y-m-d'), 'updated_by' => Auth::id()]);
         $this->audit->log('encerramento', 'contratos', $id, [], ['encerrado_em' => date('Y-m-d')]);
@@ -140,9 +228,54 @@ final class ContractsController extends Controller
         redirect('/contratos/' . $id);
     }
 
+    public function syncLiquidacoes(Request $request, string $id): void
+    {
+        header('Content-Type: application/json');
+        set_time_limit(120);
+
+        if (!\GestContratos\Core\Auth::check()) {
+            http_response_code(401);
+            echo json_encode(['success' => false, 'error' => 'Sessão expirada, recarregue a página.']);
+            return;
+        }
+
+        if (!\GestContratos\Core\Csrf::verify((string) ($request->input('_csrf', '')))) {
+            http_response_code(403);
+            echo json_encode(['success' => false, 'error' => 'CSRF inválido']);
+            return;
+        }
+
+        $pdo = \GestContratos\Core\Database::pdo();
+        $contract = $this->contracts->find((int) $id);
+        if (!$contract) { echo json_encode(['success' => false, 'error' => 'Contrato não encontrado']); return; }
+
+        $stmt = $pdo->prepare('SELECT empenho FROM contrato_empenhos WHERE contrato_id = ?');
+        $stmt->execute([(int) $id]);
+        $empenhos = $stmt->fetchAll(\PDO::FETCH_COLUMN);
+
+        if (!$empenhos) { echo json_encode(['success' => true, 'total_liquidado' => 0, 'total_pago' => 0, 'atualizados' => 0]); return; }
+
+        $liquidacoes = (new TjpaApiService())->fetchLiquidacoes($empenhos);
+
+        $upd = $pdo->prepare(
+            'UPDATE contrato_empenhos SET valor_liquidado=?, valor_pago=?, liquidado_em=NOW() WHERE contrato_id=? AND empenho=?'
+        );
+        $atualizados = 0;
+        foreach ($liquidacoes as $emp => $vals) {
+            $upd->execute([$vals['valorLiquidacao'], $vals['valorPago'], (int) $id, $emp]);
+            $atualizados++;
+        }
+
+        $totais = $pdo->prepare('SELECT COALESCE(SUM(valor_liquidado),0) AS liq, COALESCE(SUM(valor_pago),0) AS pago FROM contrato_empenhos WHERE contrato_id=?');
+        $totais->execute([(int) $id]);
+        $row = $totais->fetch();
+
+        echo json_encode(['success' => true, 'total_liquidado' => (float)$row['liq'], 'total_pago' => (float)$row['pago'], 'atualizados' => $atualizados]);
+    }
+
     public function toggleStrategic(Request $request, string $id): void
     {
-        $this->requirePermission(['gestor-contratos']);
+        $this->requireCan(Auth::canMarkStrategic());
         $this->validateCsrf($request);
         $contract = $this->contracts->find((int) $id);
         if ($contract) {
@@ -155,25 +288,13 @@ final class ContractsController extends Controller
 
     public function generateNotification(Request $request, string $id): void
     {
-        $this->requirePermission(['gestor-contratos']);
+        $this->requireCan(Auth::canNotify());
         $this->validateCsrf($request);
         $contract = $this->contracts->find((int) $id);
         if (! $contract) {
             redirect('/contratos');
         }
-        $text = $this->rules->notificationText($contract);
-        $notificationId = (new Notification())->create([
-            'contrato_id' => $id,
-            'tipo' => 'Prorrogacao',
-            'assunto' => 'Notificacao ' . $contract['chave'],
-            'texto' => $text,
-            'destinatarios' => $contract['emails_equipe'] ?? '',
-            'status' => 'rascunho',
-            'created_by' => Auth::id(),
-        ]);
-        $this->contracts->update((int) $id, ['texto_notificacao' => $text]);
-        $this->audit->log('geracao_notificacao', 'notificacoes', $notificationId, [], ['contrato_id' => $id]);
-        flash('success', 'Texto de notificacao gerado e salvo.');
+        redirect('/notificacoes/redigir/' . $id);
         redirect('/notificacoes');
     }
 

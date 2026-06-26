@@ -7,4 +7,5 @@ return [
     'url' => rtrim(env('APP_URL', 'http://localhost:8080'), '/'),
     'session_name' => env('SESSION_NAME', 'gestcontratos_session'),
     'upload_max_mb' => (int) env('UPLOAD_MAX_MB', 20),
+    'timezone' => env('APP_TIMEZONE', 'America/Belem'),
 ];

@@ -10,6 +10,7 @@
     <link href="https://cdn.datatables.net/2.0.8/css/dataTables.bootstrap5.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/responsive/3.0.2/css/responsive.bootstrap5.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/buttons/3.0.2/css/buttons.bootstrap5.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.bootstrap5.min.css" rel="stylesheet">
     <link href="<?= e(asset('css/app.css')) ?>" rel="stylesheet">
 </head>
 <body>
@@ -58,7 +59,19 @@
 <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.print.js"></script>
 <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.colVis.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
 <script src="<?= e(asset('js/app.js')) ?>"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('select.ts-search').forEach(function (el) {
+        new TomSelect(el, {
+            placeholder: el.dataset.placeholder || 'Buscar…',
+            allowEmptyOption: true,
+            maxOptions: 500,
+        });
+    });
+});
+</script>
 <?= $scripts ?? '' ?>
 </body>
 </html>

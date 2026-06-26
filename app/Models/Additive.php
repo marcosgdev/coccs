@@ -13,4 +13,13 @@ final class Additive extends Model
         'anexo_path', 'observacoes', 'created_by', 'updated_by', 'created_at',
         'updated_at', 'deleted_at',
     ];
+
+    public function forContract(int $contratoId): array
+    {
+        $stmt = \GestContratos\Core\Database::pdo()->prepare(
+            'SELECT * FROM aditivos WHERE contrato_id = ? AND deleted_at IS NULL ORDER BY numero_aditivo ASC'
+        );
+        $stmt->execute([$contratoId]);
+        return $stmt->fetchAll();
+    }
 }

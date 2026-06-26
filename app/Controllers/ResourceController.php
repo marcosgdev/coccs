@@ -33,7 +33,7 @@ abstract class ResourceController extends Controller
 
     public function create(): void
     {
-        $this->requirePermission($this->roles);
+        $this->requireCan(Auth::canWrite());
         $this->view('shared/resource_form', [
             'title' => 'Novo registro - ' . $this->title,
             'item' => [],
@@ -44,7 +44,7 @@ abstract class ResourceController extends Controller
 
     public function store(Request $request): void
     {
-        $this->requirePermission($this->roles);
+        $this->requireCan(Auth::canWrite());
         $this->validateCsrf($request);
         $data = $this->prepareData($this->collect($request), $request);
         $data['created_by'] = Auth::id();
@@ -56,7 +56,7 @@ abstract class ResourceController extends Controller
 
     public function edit(Request $request, string $id): void
     {
-        $this->requirePermission($this->roles);
+        $this->requireCan(Auth::canWrite());
         $item = $this->model->find((int) $id);
         if (! $item) {
             flash('danger', 'Registro nao encontrado.');
@@ -72,7 +72,7 @@ abstract class ResourceController extends Controller
 
     public function update(Request $request, string $id): void
     {
-        $this->requirePermission($this->roles);
+        $this->requireCan(Auth::canWrite());
         $this->validateCsrf($request);
         $before = $this->model->find((int) $id);
         $data = $this->prepareData($this->collect($request), $request);
@@ -85,7 +85,7 @@ abstract class ResourceController extends Controller
 
     public function delete(Request $request, string $id): void
     {
-        $this->requirePermission($this->roles);
+        $this->requireCan(Auth::canDelete());
         $this->validateCsrf($request);
         $before = $this->model->find((int) $id);
         $this->model->softDelete((int) $id);

@@ -46,7 +46,9 @@ final class ContractRulesService
 
     public function generateKey(string $type, string|int $number, int $year): string
     {
-        $number = preg_replace('/\D+/', '', (string) $number);
+        // Remove tudo a partir do primeiro "/" ou "\" (ex: "012/2024" → "012")
+        $number = preg_replace('/[\/\\\\].*$/', '', trim((string) $number));
+        $number = preg_replace('/\D+/', '', $number);
         $number = str_pad($number ?: '0', 3, '0', STR_PAD_LEFT);
         return strtoupper($type) . $number . '/' . $year;
     }
@@ -150,6 +152,94 @@ final class ContractRulesService
         $strategic = ! empty($contract['contrato_estrategico']) ? ' O contrato esta marcado como estrategico.' : '';
 
         return "Nos termos da {$law}, comunicamos que {$key} vinculado ao {$sector} possui termino em {$end} ({$deadline}). Solicitamos ao gestor {$manager} avaliar a necessidade de prorrogacao, renovacao, encerramento ou nova contratacao, observando o prazo limite parametrizado no sistema.{$strategic}";
+    }
+
+    public function fiscalizacaoNotificationText(array $contract): string
+    {
+        $law      = str_contains((string)($contract['base_legal_nome'] ?? ''), '8.666') ? 'Lei nº 8.666/1993' : 'Lei nº 14.133/2021';
+        $chave    = $contract['chave'] ?? '—';
+        $forn     = $contract['fornecedor_nome'] ?? '—';
+        $setor    = $contract['setor_nome'] ?? '—';
+        $termino  = !empty($contract['data_termino']) ? date_br($contract['data_termino']) : 'não informado';
+        $gestor   = $contract['gestor'] ?: 'não indicado';
+        $fd       = $contract['fiscal_demandante'] ?: 'não indicado';
+        $ft       = $contract['fiscal_tecnico'] ?: 'não indicado';
+        $objeto   = $contract['objeto'] ?? '—';
+
+        $dias = null;
+        if (!empty($contract['data_termino'])) {
+            $dias = (int) round((strtotime($contract['data_termino']) - time()) / 86400);
+        }
+
+        $alertaPrazo = '';
+        $medidas = [];
+
+        if ($dias === null) {
+            $alertaPrazo = 'O prazo de vigência não está informado no sistema.';
+        } elseif ($dias < 0) {
+            $alertaPrazo = 'ATENÇÃO: Este contrato encontra-se VENCIDO há ' . abs($dias) . ' dias.';
+            $medidas = [
+                'Verificar se há serviços ainda sendo executados sem cobertura contratual.',
+                'Comunicar imediatamente a área jurídica para avaliar a regularização.',
+                'Suspender ordens de serviço, se aplicável.',
+                'Iniciar processo emergencial de nova contratação, se necessário.',
+            ];
+        } elseif ($dias <= 30) {
+            $alertaPrazo = 'URGENTE: O contrato vence em ' . $dias . ' dias (' . $termino . ').';
+            $medidas = [
+                'Avaliar imediatamente a necessidade de prorrogação ou encerramento.',
+                'Verificar se já foi instaurado processo administrativo de renovação.',
+                'Garantir que não haja ordens de serviço abertas além da data de vencimento.',
+                'Comunicar ao fornecedor sobre o encerramento ou continuidade.',
+                'Elaborar relatório final de fiscalização do contrato, se for encerrar.',
+            ];
+        } elseif ($dias <= 90) {
+            $alertaPrazo = 'ATENÇÃO: O contrato vence em ' . $dias . ' dias (' . $termino . ').';
+            $medidas = [
+                'Iniciar avaliação sobre prorrogação, nova licitação ou encerramento.',
+                'Verificar o saldo contratual disponível e a execução até o momento.',
+                'Conferir se todos os atestes de serviço estão em dia.',
+                'Avaliar desempenho do contratado para subsidiar decisão de renovação.',
+                'Verificar prazo legal máximo de 60 meses para contratos de serviços contínuos.',
+            ];
+        } elseif ($dias <= 180) {
+            $alertaPrazo = 'O contrato vence em ' . $dias . ' dias (' . $termino . '). Acompanhamento preventivo recomendado.';
+            $medidas = [
+                'Monitorar a execução contratual e os indicadores de desempenho.',
+                'Verificar reajustes contratuais previstos e providenciar apostilamentos.',
+                'Iniciar planejamento preliminar para eventual renovação ou nova contratação.',
+                'Manter atualizado o diário de bordo e os relatórios de fiscalização.',
+            ];
+        } else {
+            $alertaPrazo = 'O contrato vence em ' . $dias . ' dias (' . $termino . '). Situação regular.';
+            $medidas = [
+                'Manter rotina normal de fiscalização e ateste de serviços.',
+                'Acompanhar indicadores contratuais e registrar ocorrências.',
+            ];
+        }
+
+        $medidasTexto = '';
+        foreach ($medidas as $i => $m) {
+            $medidasTexto .= ($i + 1) . '. ' . $m . "\n";
+        }
+
+        return "NOTIFICAÇÃO DE FISCALIZAÇÃO CONTRATUAL\n"
+            . str_repeat('─', 50) . "\n\n"
+            . "Contrato: {$chave}\n"
+            . "Fornecedor: {$forn}\n"
+            . "Objeto: {$objeto}\n"
+            . "Setor demandante: {$setor}\n"
+            . "Base legal: {$law}\n\n"
+            . "EQUIPE RESPONSÁVEL\n"
+            . "Gestor: {$gestor}\n"
+            . "Fiscal demandante: {$fd}\n"
+            . "Fiscal técnico: {$ft}\n\n"
+            . "SITUAÇÃO DO PRAZO\n"
+            . "{$alertaPrazo}\n\n"
+            . "MEDIDAS RECOMENDADAS\n"
+            . $medidasTexto . "\n"
+            . "Esta notificação foi gerada automaticamente pelo sistema de gestão de contratos do TJPA em " . date('d/m/Y \à\s H:i') . ".\n"
+            . "Para dúvidas, entre em contato com a Coordenadoria de Contratos.";
     }
 
     private function date(mixed $value): ?DateTimeImmutable

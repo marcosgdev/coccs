@@ -19,6 +19,83 @@ final class ExcelImportService
     private string $mode = 'simulacao';
     private string $fileName = 'Contratos 2024.xlsm';
 
+    /**
+     * Importa valores de execução de ARPs a partir de uma planilha dedicada.
+     * Colunas esperadas: N° Ata, Ano da Ata, Valor Atualizado (após reajuste),
+     *                    Valor Executado no Exercício, Valor Executado Acumulado, Quantidade de Aditivos.
+     */
+    public function importArpExecution(string $path, bool $simulate = false): array
+    {
+        @set_time_limit(0);
+        $spreadsheet = $this->loadSpreadsheet($path, true);
+        $sheet       = $spreadsheet->getActiveSheet();
+        $rows        = $this->assocRows($sheet, 1);
+
+        // Estrutura fixa da planilha (leitura posicional — evita problemas de encoding nos cabeçalhos):
+        // Col A(1): N° Ata  B(2): Ano da Ata  C(3): Objeto  D(4): Fornecedor
+        // E(5): Valor Inicial  F(6): Valor Atualizado  G(7): Exec. Exercício
+        // H(8): Exec. Acumulado  I(9): Qtd Aditivos
+        // Linha 1 = cabeçalho → dados a partir da linha 2
+        $pdo      = \GestContratos\Core\Database::pdo();
+        $updated  = 0;
+        $notFound = [];
+        $rowsRead = 0;
+
+        // Cabeçalhos reais para diagnóstico
+        $rawHeaders = [];
+        for ($c = 1; $c <= 9; $c++) {
+            $rawHeaders[] = (string) $this->cell($this->cellAt($sheet, $c, 1));
+        }
+
+        $stmtUpd = $pdo->prepare("
+            UPDATE contratos
+            SET valor_global_atualizado   = CASE WHEN ? > 0 THEN ? ELSE valor_global_atualizado END,
+                valor_executado           = ?,
+                valor_acumulado_executado = ?,
+                quantidade_aditivos       = CASE WHEN ? > 0 THEN ? ELSE quantidade_aditivos END
+            WHERE id = ? AND deleted_at IS NULL
+        ");
+
+        $maxRow = $sheet->getHighestDataRow();
+        for ($r = 2; $r <= $maxRow; $r++) {
+            $numero      = trim((string) ($this->cell($this->cellAt($sheet, 1, $r)) ?? ''));
+            $ano         = (int) ($this->cell($this->cellAt($sheet, 2, $r)) ?? 0);
+            if ($numero === '' || !$ano) continue;
+            $rowsRead++;
+
+            $vAtualizado = (float) ($this->cell($this->cellAt($sheet, 6, $r)) ?: 0);
+            $vExercicio  = (float) ($this->cell($this->cellAt($sheet, 7, $r)) ?: 0);
+            $vAcumulado  = (float) ($this->cell($this->cellAt($sheet, 8, $r)) ?: 0);
+            $qtdAditivos = (int)   ($this->cell($this->cellAt($sheet, 9, $r)) ?: 0);
+
+            $existing = $this->findExistingContrato(
+                'ARP' . $numero . '/' . $ano, 'ARP', $numero, $ano
+            );
+            if (!$existing) {
+                $notFound[] = "ARP{$numero}/{$ano}";
+                continue;
+            }
+            if (!$simulate) {
+                $stmtUpd->execute([
+                    $vAtualizado, $vAtualizado,
+                    $vExercicio,
+                    $vAcumulado,
+                    $qtdAditivos, $qtdAditivos,
+                    (int) $existing['id'],
+                ]);
+            }
+            $updated++;
+        }
+
+        $spreadsheet->disconnectWorksheets();
+        return [
+            'updated'   => $updated,
+            'not_found' => $notFound,
+            'rows_read' => $rowsRead,
+            'headers'   => $rawHeaders,
+        ];
+    }
+
     public function preview(string $path): array
     {
         $spreadsheet = $this->loadSpreadsheet($path, true);
@@ -38,7 +115,7 @@ final class ExcelImportService
         return $sheets;
     }
 
-    public function import(string $path, bool $simulate = false, string $duplicateMode = 'ignore', ?int $batchId = null): array
+    public function import(string $path, bool $simulate = false, string $duplicateMode = 'ignore', ?int $batchId = null, array $operations = []): array
     {
         @set_time_limit(0);
         ini_set('memory_limit', '1024M');
@@ -60,14 +137,16 @@ final class ExcelImportService
             'errors' => [],
         ];
 
-        foreach ([
+        $all = [
             'contracts' => fn () => $this->importContracts($spreadsheet->getSheetByName('Contratos Vigentes'), $simulate, $duplicateMode),
             'arps' => fn () => $this->importArps($spreadsheet->getSheetByName('ATA empresa valores'), $simulate, $duplicateMode),
             'financial' => fn () => $this->importFinancial($spreadsheet, $simulate),
             'servers' => fn () => $this->importServers($spreadsheet->getSheetByName('Gestão&Fiscalização'), $simulate),
             'sectors' => fn () => $this->importSectors($spreadsheet->getSheetByName('SETOREQ'), $simulate),
             'auxiliary' => fn () => $this->importAuxiliary($spreadsheet, $simulate),
-        ] as $key => $operation) {
+        ];
+        $selected = $operations ? array_intersect_key($all, array_flip($operations)) : $all;
+        foreach ($selected as $key => $operation) {
             try {
                 $result[$key] = $operation();
             } catch (\Throwable $exception) {
@@ -100,9 +179,12 @@ final class ExcelImportService
             if (! $tipo || ! $numero || ! $ano) {
                 continue;
             }
+            if ($tipo !== 'ARP') {
+                continue;
+            }
 
             $data = [
-                'tipo' => $tipo === 'ARP' ? 'ARP' : 'CONTRATO',
+                'tipo' => 'ARP',
                 'numero' => $numero,
                 'ano' => (int) $ano,
                 'fornecedor_nome' => $this->value($row, ['nome_credor']),
@@ -138,10 +220,13 @@ final class ExcelImportService
             $data = $rules->normalize($data);
 
             if (! $simulate) {
-                $existing = $model->findByKey($data['chave']);
-                if ($existing && $duplicateMode === 'overwrite') {
-                    $model->update((int) $existing['id'], $data);
-                } elseif (! $existing) {
+                $existing = $this->findExistingContrato($data['chave'], $data['tipo'], $data['numero'], (int) $data['ano']);
+                if ($existing) {
+                    $wasDeleted = ! empty($existing['deleted_at']);
+                    if ($wasDeleted || $duplicateMode === 'overwrite') {
+                        $model->update((int) $existing['id'], array_merge($data, ['deleted_at' => null]));
+                    }
+                } else {
                     $model->create($this->withBatch($data));
                 }
             }
@@ -186,11 +271,14 @@ final class ExcelImportService
             $data['situacao'] = $rules->situation($end);
             $data['saldo'] = $data['valor_total'];
             if (! $simulate) {
-                $existing = $this->exists('arps', ['chave' => $data['chave']]);
-                if (! $existing || $duplicateMode === 'overwrite') {
-                    $existing
-                        ? $model->update((int) $existing['id'], $data)
-                        : $model->create($this->withBatch($data));
+                $existing = $this->findExistingArp($data['chave'], $numero, (int) $ano);
+                if ($existing) {
+                    $wasDeleted = ! empty($existing['deleted_at']);
+                    if ($wasDeleted || $duplicateMode === 'overwrite') {
+                        $model->update((int) $existing['id'], array_merge($data, ['deleted_at' => null]));
+                    }
+                } else {
+                    $model->create($this->withBatch($data));
                 }
             }
             $this->log('ATA empresa valores', $rowNumber, 'ok', $simulate ? 'Simulado' : 'Importado', $data);
@@ -518,6 +606,63 @@ final class ExcelImportService
             $data['import_batch_id'] = $this->batchId;
         }
         return $data;
+    }
+
+    /**
+     * Busca um contrato/ARP existente pela chave, incluindo soft-deletados.
+     * Fallback: busca por (tipo, número limpo, ano) para cobrir variações de formato.
+     */
+    private function findExistingContrato(string $chave, string $tipo, string $numero, int $ano): ?array
+    {
+        $pdo = \GestContratos\Core\Database::pdo();
+
+        $stmt = $pdo->prepare('SELECT * FROM contratos WHERE chave = ? LIMIT 1');
+        $stmt->execute([$chave]);
+        if ($row = $stmt->fetch()) {
+            return $row;
+        }
+
+        // Fallback: compara dígitos do número para detectar formato diferente na planilha
+        $numDigits = preg_replace('/\D+/', '', explode('/', $numero)[0]);
+        if ($numDigits === '') {
+            return null;
+        }
+        $stmt = $pdo->prepare("
+            SELECT * FROM contratos
+            WHERE tipo = ? AND ano = ?
+              AND LPAD(REGEXP_REPLACE(numero, '[^0-9]', ''), 3, '0') = LPAD(?, 3, '0')
+            LIMIT 1
+        ");
+        $stmt->execute([$tipo, $ano, $numDigits]);
+        return $stmt->fetch() ?: null;
+    }
+
+    /**
+     * Busca uma ARP existente pela chave, incluindo soft-deletadas.
+     * Fallback: busca por número limpo + ano.
+     */
+    private function findExistingArp(string $chave, string $numero, int $ano): ?array
+    {
+        $pdo = \GestContratos\Core\Database::pdo();
+
+        $stmt = $pdo->prepare('SELECT * FROM arps WHERE chave = ? LIMIT 1');
+        $stmt->execute([$chave]);
+        if ($row = $stmt->fetch()) {
+            return $row;
+        }
+
+        $numDigits = preg_replace('/\D+/', '', explode('/', $numero)[0]);
+        if ($numDigits === '') {
+            return null;
+        }
+        $stmt = $pdo->prepare("
+            SELECT * FROM arps
+            WHERE ano = ?
+              AND LPAD(REGEXP_REPLACE(numero_ata, '[^0-9]', ''), 3, '0') = LPAD(?, 3, '0')
+            LIMIT 1
+        ");
+        $stmt->execute([$ano, $numDigits]);
+        return $stmt->fetch() ?: null;
     }
 
     private function exists(string $table, array $filters): ?array

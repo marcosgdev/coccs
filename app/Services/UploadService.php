@@ -10,7 +10,7 @@ final class UploadService
             return null;
         }
         if (($file['error'] ?? UPLOAD_ERR_OK) !== UPLOAD_ERR_OK) {
-            throw new \RuntimeException('Falha no upload do arquivo.');
+            throw new \RuntimeException($this->uploadErrorMessage((int) $file['error']));
         }
 
         $maxBytes = (int) config('app.upload_max_mb', 20) * 1024 * 1024;
@@ -33,5 +33,17 @@ final class UploadService
             throw new \RuntimeException('Nao foi possivel salvar o arquivo.');
         }
         return $relative;
+    }
+
+    private function uploadErrorMessage(int $error): string
+    {
+        return match ($error) {
+            UPLOAD_ERR_INI_SIZE, UPLOAD_ERR_FORM_SIZE => 'Arquivo acima do limite permitido pelo PHP. Reinicie o sistema local e tente novamente.',
+            UPLOAD_ERR_PARTIAL => 'Upload incompleto. Tente enviar a planilha novamente.',
+            UPLOAD_ERR_NO_TMP_DIR => 'Pasta temporaria de upload nao configurada no PHP.',
+            UPLOAD_ERR_CANT_WRITE => 'Nao foi possivel gravar o arquivo temporario do upload.',
+            UPLOAD_ERR_EXTENSION => 'Uma extensao do PHP bloqueou o upload.',
+            default => 'Falha no upload do arquivo.',
+        };
     }
 }

@@ -9,6 +9,8 @@ final class Application
         $GLOBALS['base_path'] = $this->basePath;
         $this->loadEnv();
 
+        date_default_timezone_set(config('app.timezone', 'America/Belem'));
+
         $sessionName = config('app.session_name', 'gestcontratos_session');
         if (session_status() !== PHP_SESSION_ACTIVE) {
             session_name($sessionName);

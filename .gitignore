@@ -1,0 +1,40 @@
+# Ambiente
+.env
+.env.local
+.env.*.local
+
+# Dependências
+/vendor/
+/node_modules/
+
+# Uploads e imports temporários
+/storage/imports/
+/storage/logs/
+/storage/*.log
+/storage/*.out.log
+/storage/*.err.log
+
+# Cache e sessões PHP
+/storage/cache/
+/storage/sessions/
+/storage/temp/
+
+# Memória do Claude Code
+/.claude/
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Arquivos temporários de imagens na raiz (usar public/assets/img)
+/12.png
+/21*.png
+/coccs*.png
+/*.png

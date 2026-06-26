@@ -1,6 +1,13 @@
 <section class="auth-card">
     <div class="text-center mb-4">
-        <img src="<?= e(asset('img/logo.svg')) ?>" alt="GestContratos" class="auth-logo img-fluid mb-3">
+        <img src="<?= e(asset('img/brasao-tjpa-color.png')) ?>" alt="Tribunal de Justica do Estado do Para" style="height:130px;width:auto;">
+    </div>
+    <div class="d-flex align-items-center justify-content-center gap-4 mb-4 pb-4" style="border-bottom:1px solid var(--gc-border);">
+        <img src="<?= e(asset('img/logo-sead.png')) ?>" alt="SEAD" style="height:90px;width:auto;">
+        <div class="vr" style="height:70px;opacity:.25;"></div>
+        <img src="<?= e(asset('img/logo-coccs.png')) ?>" alt="COCCS" style="height:90px;width:auto;">
+    </div>
+    <div class="text-center mb-4">
         <p class="text-secondary mb-0">Ambiente institucional para contratos, ARPs e fiscalizacao.</p>
     </div>
 

@@ -27,6 +27,16 @@ abstract class Controller
         }
     }
 
+    protected function requireCan(bool $allowed): void
+    {
+        $this->requireAuth();
+        if (! $allowed) {
+            http_response_code(403);
+            View::render('errors/403', ['title' => 'Acesso negado']);
+            exit;
+        }
+    }
+
     protected function validateCsrf(Request $request): void
     {
         if (! Csrf::verify((string) $request->input('_csrf', ''))) {

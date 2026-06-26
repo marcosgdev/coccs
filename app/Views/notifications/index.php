@@ -7,7 +7,7 @@
             <?= csrf_field() ?>
             <div class="col-12 col-lg-5">
                 <label class="form-label" for="contrato_id">Contrato/ARP</label>
-                <select class="form-select" id="contrato_id" name="contrato_id" required>
+                <select class="form-select ts-search" id="contrato_id" name="contrato_id" required data-placeholder="Buscar contrato ou fornecedor…">
                     <option value="">Selecione</option>
                     <?php foreach ($contracts as $contract): ?>
                         <option value="<?= e($contract['id']) ?>"><?= e($contract['chave'] . ' - ' . $contract['fornecedor_nome']) ?></option>

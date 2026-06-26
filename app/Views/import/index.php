@@ -1,3 +1,40 @@
+<!-- Importação rápida de execução de ARPs -->
+<section class="gc-card p-4 mb-4" style="border-left:4px solid #7c3aed">
+    <h2 class="h5 fw-bold mb-1">
+        <i class="bi bi-file-earmark-bar-graph me-2 text-purple" style="color:#7c3aed"></i>
+        Importar Execução de ARPs
+    </h2>
+    <p class="text-muted small mb-3">
+        Planilha com colunas: <strong>N° Ata · Ano da Ata · Valor Atualizado (após reajuste) · Valor Executado no Exercício · Valor Executado Acumulado · Quantidade de Aditivos</strong>.
+        Atualiza os valores de execução nos registros de ARP existentes.
+    </p>
+    <form method="post" action="<?= e(url('/importacao/arp-execucao')) ?>"
+          enctype="multipart/form-data" class="row g-2 align-items-end">
+        <?= csrf_field() ?>
+        <div class="col-12 col-md-6">
+            <label class="form-label small fw-semibold">Planilha (.xlsx / .xlsm)</label>
+            <input type="file" name="planilha" accept=".xlsx,.xlsm,.xls" required class="form-control form-control-sm">
+        </div>
+        <div class="col-auto">
+            <div class="form-check form-check-inline mt-4">
+                <input class="form-check-input" type="checkbox" name="mode" value="simulate" id="arp-sim" checked>
+                <label class="form-check-label small" for="arp-sim">Simular (não salvar)</label>
+            </div>
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-sm" style="background:#7c3aed;color:#fff;font-weight:600">
+                <i class="bi bi-upload me-1"></i> Importar ARPs
+            </button>
+        </div>
+    </form>
+</section>
+
+<div class="d-flex justify-content-end mb-3">
+    <a href="<?= e(url('/importacao/duplicatas')) ?>" class="btn btn-outline-warning btn-sm">
+        <i class="bi bi-copy me-1"></i>Verificar e remover duplicatas
+    </a>
+</div>
+
 <section class="gc-card p-4 mb-4">
     <h2 class="h5 fw-bold">Upload e pre-visualizacao</h2>
     <form method="post" action="<?= e(url('/importacao/preview')) ?>" enctype="multipart/form-data" class="row g-3 align-items-end">
@@ -16,15 +53,6 @@
     <section class="gc-card p-4 mb-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h2 class="h5 fw-bold mb-0">Abas identificadas</h2>
-            <form method="post" action="<?= e(url('/importacao/executar')) ?>" class="d-flex gap-2">
-                <?= csrf_field() ?>
-                <select class="form-select form-select-sm" name="duplicate_mode" aria-label="Modo de duplicidade">
-                    <option value="ignore">Ignorar duplicados</option>
-                    <option value="overwrite">Sobrescrever duplicados existentes</option>
-                </select>
-                <button class="btn btn-outline-primary btn-sm" name="simulate" value="1" type="submit">Simular</button>
-                <button class="btn btn-primary btn-sm" type="submit">Importar</button>
-            </form>
         </div>
         <div class="table-responsive">
             <table class="table table-hover align-middle">
@@ -42,6 +70,39 @@
                 </tbody>
             </table>
         </div>
+
+        <form method="post" action="<?= e(url('/importacao/executar')) ?>" class="mt-3">
+            <?= csrf_field() ?>
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Abas a importar</label>
+                <div class="d-flex flex-wrap gap-3">
+                    <?php
+                    $ops = [
+                        'contracts' => 'ARPs / Atas (aba Contratos Vigentes)',
+                        'arps'      => 'ATA empresa valores',
+                        'financial' => 'Execucao financeira',
+                        'servers'   => 'Gestao e Fiscalizacao',
+                        'sectors'   => 'Setores (SETOREQ)',
+                        'auxiliary' => 'Dados auxiliares',
+                    ];
+                    foreach ($ops as $key => $label):
+                    ?>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="operations[]" value="<?= e($key) ?>" id="op_<?= e($key) ?>" checked>
+                        <label class="form-check-label" for="op_<?= e($key) ?>"><?= e($label) ?></label>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+            <div class="d-flex gap-2 align-items-center">
+                <select class="form-select form-select-sm w-auto" name="duplicate_mode" aria-label="Modo de duplicidade">
+                    <option value="ignore">Ignorar duplicados</option>
+                    <option value="overwrite">Sobrescrever duplicados existentes</option>
+                </select>
+                <button class="btn btn-outline-primary btn-sm" name="simulate" value="1" type="submit">Simular</button>
+                <button class="btn btn-primary btn-sm" type="submit">Importar</button>
+            </div>
+        </form>
     </section>
 <?php endif; ?>
 
@@ -49,7 +110,7 @@
     <section class="gc-card p-4">
         <h2 class="h5 fw-bold">Resultado <?= $result['simulate'] ? 'da simulacao' : 'da importacao' ?></h2>
         <dl class="row detail-list">
-            <?php foreach (['contracts' => 'Contratos', 'arps' => 'ARPs', 'financial' => 'Execucoes', 'servers' => 'Servidores', 'sectors' => 'Setores', 'auxiliary' => 'Auxiliares'] as $key => $label): ?>
+            <?php foreach (['contracts' => 'ARPs da carteira', 'arps' => 'ATA empresa valores', 'financial' => 'Execucoes', 'servers' => 'Servidores', 'sectors' => 'Setores', 'auxiliary' => 'Auxiliares'] as $key => $label): ?>
                 <div class="col-6 col-md-4 col-xl-2"><dt><?= e($label) ?></dt><dd><?= e($result[$key] ?? 0) ?></dd></div>
             <?php endforeach; ?>
         </dl>
@@ -85,7 +146,7 @@
                     <td><?= e($batch['started_at']) ?></td>
                     <td><?= e($batch['finished_at'] ?? '-') ?></td>
                     <td class="small">
-                        Contratos: <?= e($result['contracts'] ?? 0) ?>;
+                        ARPs carteira: <?= e($result['contracts'] ?? 0) ?>;
                         ARPs: <?= e($result['arps'] ?? 0) ?>;
                         Execucoes: <?= e($result['financial'] ?? 0) ?>
                     </td>

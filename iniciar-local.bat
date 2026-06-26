@@ -27,7 +27,15 @@ if not exist "vendor\autoload.php" (
   )
 )
 
-powershell -NoProfile -ExecutionPolicy Bypass -Command "$s=Get-Service -Name MySQL80 -ErrorAction SilentlyContinue; if($s -and $s.Status -ne 'Running'){ Start-Service -Name MySQL80 -ErrorAction SilentlyContinue; Start-Sleep -Seconds 2 }; $s=Get-Service -Name MySQL80 -ErrorAction SilentlyContinue; if($s){ Write-Host ('MySQL80: ' + $s.Status) } else { Write-Host 'MySQL80 nao encontrado. Verifique se o MySQL/MariaDB configurado no .env esta rodando.' }"
+powershell -NoProfile -ExecutionPolicy Bypass -Command ^
+  "$mariaExe='C:\Users\vinicius.encarnacao\AppData\Local\MariaDB\mariadb-11.4.7-winx64\bin\mysqld.exe';" ^
+  "$dataDir='C:\Users\vinicius.encarnacao\AppData\Local\MariaDB\data';" ^
+  "$running=Get-NetTCPConnection -LocalPort 3306 -State Listen -ErrorAction SilentlyContinue;" ^
+  "if(-not $running){" ^
+  "  Write-Host 'Iniciando MariaDB...';" ^
+  "  Start-Process -FilePath $mariaExe -ArgumentList '--console','--datadir=' + $dataDir,'--port=3306' -WindowStyle Hidden;" ^
+  "  Start-Sleep -Seconds 3; Write-Host 'MariaDB iniciado.'" ^
+  "} else { Write-Host 'MariaDB ja esta rodando na porta 3306.' }"
 
 powershell -NoProfile -ExecutionPolicy Bypass -Command "$p=Get-NetTCPConnection -LocalPort 8080 -State Listen -ErrorAction SilentlyContinue; if($p){ exit 2 }"
 if errorlevel 2 (
@@ -46,7 +54,7 @@ echo Para parar, pressione Ctrl+C ou execute parar-local.bat.
 echo.
 
 start "" powershell -WindowStyle Hidden -NoProfile -ExecutionPolicy Bypass -Command "Start-Sleep -Seconds 2; Start-Process '%APP_URL%'"
-php -S 127.0.0.1:8080 -t public public/router.php
+php -d upload_max_filesize=50M -d post_max_size=60M -d memory_limit=512M -S 127.0.0.1:8080 -t public public/router.php
 
 echo.
 echo Servidor local encerrado.

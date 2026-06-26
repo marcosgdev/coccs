@@ -12,6 +12,7 @@ $links = [
     ['/usuarios', 'Usuarios', 'bi-person-gear'],
     ['/perfis', 'Perfis de acesso', 'bi-shield-lock'],
     ['/configuracoes', 'Parametros do sistema', 'bi-sliders'],
+    ['/mapeamento-setores', 'Mapeamento de unidades gestoras', 'bi-signpost-split'],
 ];
 ?>
 <div class="row g-3">

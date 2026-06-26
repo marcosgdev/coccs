@@ -1,6 +1,10 @@
 <?php
 
 use GestContratos\Controllers\AdditivesController;
+use GestContratos\Controllers\TrackingController;
+use GestContratos\Controllers\SetorMapeamentosController;
+use GestContratos\Controllers\SyncController;
+use GestContratos\Controllers\TjpaApiController;
 use GestContratos\Controllers\ArpsController;
 use GestContratos\Controllers\AuditController;
 use GestContratos\Controllers\AuthController;
@@ -38,6 +42,9 @@ $router->post('/contratos/{id}/duplicar', [ContractsController::class, 'duplicat
 $router->post('/contratos/{id}/encerrar', [ContractsController::class, 'close']);
 $router->post('/contratos/{id}/estrategico', [ContractsController::class, 'toggleStrategic']);
 $router->post('/contratos/{id}/notificacao', [ContractsController::class, 'generateNotification']);
+$router->post('/contratos/{id}/liquidacoes', [ContractsController::class, 'syncLiquidacoes']);
+$router->post('/contratos/{id}/acompanhamento', [TrackingController::class, 'store']);
+$router->post('/contratos/{id}/acompanhamento/{aid}/excluir', [TrackingController::class, 'destroy']);
 
 $resource = function (string $base, string $controller) use ($router): void {
     $router->get($base, [$controller, 'index']);
@@ -48,8 +55,10 @@ $resource = function (string $base, string $controller) use ($router): void {
     $router->post($base . '/{id}/excluir', [$controller, 'delete']);
 };
 
-$resource('/arps', ArpsController::class);
+$router->get('/arps', [ArpsController::class, 'index']);
+$router->get('/arps/{id}', [ArpsController::class, 'show']);
 $resource('/execucao-financeira', FinancialExecutionController::class);
+$router->post('/aditivos/processo-status', [AdditivesController::class, 'processoStatus']);
 $resource('/aditivos', AdditivesController::class);
 $resource('/servidores', ServersController::class);
 $resource('/usuarios', UsersController::class);
@@ -82,9 +91,24 @@ $router->get('/cadastros-auxiliares', [AuxiliaryController::class, 'index']);
 
 $router->get('/notificacoes', [NotificationsController::class, 'index']);
 $router->post('/notificacoes', [NotificationsController::class, 'store']);
+$router->get('/notificacoes/redigir/{id}', [NotificationsController::class, 'compose']);
+$router->post('/notificacoes/redigir/{id}', [NotificationsController::class, 'send']);
 $router->post('/notificacoes/{id}/enviar', [NotificationsController::class, 'markSent']);
 
+$router->get('/mapeamento-setores', [SetorMapeamentosController::class, 'index']);
+$router->post('/mapeamento-setores', [SetorMapeamentosController::class, 'store']);
+$router->post('/mapeamento-setores/{id}/toggle', [SetorMapeamentosController::class, 'toggle']);
+$router->post('/mapeamento-setores/{id}/excluir', [SetorMapeamentosController::class, 'delete']);
+
 $router->get('/relatorios', [ReportsController::class, 'index']);
+$router->post('/relatorios/atas-valores', [ReportsController::class, 'uploadArpValues']);
+$router->get('/relatorios/secretaria-pdf', [ReportsController::class, 'secretariaPdf']);
+$router->get('/relatorios/secretaria-contratos', [ReportsController::class, 'secretariaContratos']);
+$router->get('/relatorios/secretaria-arps', [ReportsController::class, 'secretariaArps']);
+$router->get('/relatorios/bienios', [ReportsController::class, 'bienios']);
+$router->get('/relatorios/aditivos-financeiros', [ReportsController::class, 'additivosFinanceiros']);
+$router->get('/relatorios/prazo-vigencia', [ReportsController::class, 'prazoVigencia']);
+$router->get('/relatorios/sem-gestor-fiscal', [ReportsController::class, 'semGestorFiscal']);
 
 $router->get('/manuais/uso', [ManualsController::class, 'usage']);
 $router->get('/manuais/manutencao', [ManualsController::class, 'maintenance']);
@@ -93,8 +117,20 @@ $router->get('/manuais/implantacao', [ManualsController::class, 'deployment']);
 $router->get('/importacao', [ImportController::class, 'index']);
 $router->post('/importacao/preview', [ImportController::class, 'preview']);
 $router->post('/importacao/executar', [ImportController::class, 'run']);
+$router->get('/importacao/duplicatas', [ImportController::class, 'duplicatas']);
+$router->post('/importacao/duplicatas/limpar', [ImportController::class, 'limparDuplicatas']);
+$router->post('/importacao/arp-execucao', [ImportController::class, 'arpExecution']);
 $router->post('/importacao/lotes/{id}/desfazer', [ImportController::class, 'undo']);
 $router->post('/importacao/lotes/{id}/excluir', [ImportController::class, 'deleteBatch']);
 $router->get('/logs-importacao', [ImportController::class, 'logs']);
 
 $router->get('/auditoria', [AuditController::class, 'index']);
+
+$router->post('/sync/tjpa',            [SyncController::class, 'tjpa']);
+$router->post('/sync/liquidacoes',     [SyncController::class, 'allLiquidacoes']);
+$router->post('/sync/aditivos-datas',  [SyncController::class, 'syncAditivosDatas']);
+$router->post('/sync/reset-contratos', [SyncController::class, 'resetContratos']);
+
+$router->get('/api/tjpa/contratos', [TjpaApiController::class, 'contratos']);
+$router->get('/api/tjpa/aditivos', [TjpaApiController::class, 'aditivos']);
+$router->get('/api/tjpa/empenhos', [TjpaApiController::class, 'empenhos']);

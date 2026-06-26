@@ -39,8 +39,13 @@ final class Contract extends Model
         }
 
         if (! empty($filters['q'])) {
-            $clauses[] = '(c.chave LIKE :q OR c.numero LIKE :q OR c.fornecedor_nome LIKE :q OR c.objeto LIKE :q OR c.processo LIKE :q)';
-            $params['q'] = '%' . $filters['q'] . '%';
+            $clauses[] = '(c.chave LIKE :q_chave OR c.numero LIKE :q_numero OR c.fornecedor_nome LIKE :q_fornecedor OR c.objeto LIKE :q_objeto OR c.processo LIKE :q_processo)';
+            $qVal = '%' . $filters['q'] . '%';
+            $params['q_chave']      = $qVal;
+            $params['q_numero']     = $qVal;
+            $params['q_fornecedor'] = $qVal;
+            $params['q_objeto']     = $qVal;
+            $params['q_processo']   = $qVal;
         }
 
         $sql = 'SELECT c.* FROM contratos c WHERE ' . implode(' AND ', $clauses) . ' ORDER BY c.data_termino IS NULL, c.data_termino ASC, c.id DESC LIMIT ' . (int) $limit;

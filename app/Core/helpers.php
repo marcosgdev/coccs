@@ -62,6 +62,13 @@ if (! function_exists('e')) {
     }
 }
 
+if (! function_exists('csrf_token')) {
+    function csrf_token(): string
+    {
+        return \GestContratos\Core\Csrf::token();
+    }
+}
+
 if (! function_exists('csrf_field')) {
     function csrf_field(): string
     {
